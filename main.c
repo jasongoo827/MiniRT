@@ -6,7 +6,7 @@
 /*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:36:40 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/08 19:12:38 by yakim            ###   ########.fr       */
+/*   Updated: 2024/04/08 20:11:18 by yakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,14 @@ int	main(int argc, char **argv)
 {
 	t_vars	vars;
 
-	(void)argc;
-	(void)argv;
 	vars.mlx = mlx_init();
 	win_init(vars.mlx, &vars.win);
 
 	//parsing
 	parse(argc, argv);
+	print_parse();
+	//parsing end
 
-
-	
 	int i = 500;
 	while (i >= 0)
 	{

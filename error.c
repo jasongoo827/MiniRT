@@ -1,7 +1,8 @@
 # include "error.h"
 
-void	nullcheck(void *ptr)
+void	null_check(void *ptr)
 {
-	// if (ptr == NULL)
-		
+	if (ptr == NULL)
+		ft_putstr_fd(MALLOC_ERR, 2);
+	exit (1);
 }

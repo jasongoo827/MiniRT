@@ -6,14 +6,12 @@
 /*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:36:40 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/08 15:41:39 by yakim            ###   ########.fr       */
+/*   Updated: 2024/04/08 19:12:38 by yakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
 #include "mlx.h"
-#include "object.h"
+#include "minirt.h"
 
 typedef struct s_vars
 {
@@ -46,7 +44,12 @@ int	main(int argc, char **argv)
 	(void)argv;
 	vars.mlx = mlx_init();
 	win_init(vars.mlx, &vars.win);
-	t_camera	c = camera(point3(0, 0, 0), vec3(0, 0, 1), 90);
+
+	//parsing
+	parse(argc, argv);
+
+
+	
 	int i = 500;
 	while (i >= 0)
 	{

@@ -1,18 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/06 14:37:41 by jgoo              #+#    #+#             */
-/*   Updated: 2024/04/09 14:34:11 by yakim            ###   ########.fr       */
+/*   Created: 2024/04/09 14:41:50 by yakim             #+#    #+#             */
+/*   Updated: 2024/04/09 17:02:08 by yakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isdigit(int c)
+#include "essential.h"
+
+void	free_split(char **arr)
 {
-	if (c >= '0' && c <= '9')
-		return (4);
-	return (0);
+	char	**temp;
+
+	temp = arr;
+	while (*temp)
+	{
+		free(*temp);
+		temp++;
+	}
+	free(arr);
 }

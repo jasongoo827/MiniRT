@@ -4,6 +4,7 @@
 		"minirt.h": "c",
 		"libft.h": "c",
 		"error.h": "c",
-		"essential.h": "c"
+		"essential.h": "c",
+		"chrono": "c"
 	}
 }

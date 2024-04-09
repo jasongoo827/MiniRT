@@ -6,14 +6,14 @@
 /*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 14:54:50 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/08 20:20:23 by yakim            ###   ########.fr       */
+/*   Updated: 2024/04/09 17:02:05 by yakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef OBJECT_H
 # define OBJECT_H
 
-# include "matrix.h"
+# include "essential.h"
 
 typedef enum e_type
 {
@@ -24,19 +24,33 @@ typedef enum e_type
 	CYLINDER
 }	t_type;
 
+typedef struct s_camera
+{
+	t_vector	origin;
+	t_vector	dir;
+	double		fov;
+	t_vector	horizontal;
+	t_vector	vertical;
+}	t_camera;
+
+typedef struct s_light
+{
+	t_vector	origin;
+	double		ratio;
+	t_vector	color;
+}	t_light;
+
+typedef struct s_ambient
+{
+	double		ratio;
+	t_vector	color;
+}	t_ambient;
+
 typedef struct s_obj
 {
 	t_type	type;
 	void	*ptr;
 }	t_obj;
-
-typedef struct s_camera
-{
-	t_vector	origin;
-	t_vector	dir;
-	t_vector	horizontal;
-	t_vector	vertical;
-}	t_camera;
 
 typedef struct s_ray
 {
@@ -57,6 +71,16 @@ typedef struct s_plane
 	t_vector	normal;
 	t_vector	color;
 }	t_plane;
+
+typedef struct s_info
+{
+	void		*mlx;
+	void		*win;
+	t_ambient	ambient;
+	t_camera	camera;
+	t_light		light;
+	t_darray	objarr;
+}	t_info;
 
 t_camera	camera(t_vector origin, t_vector dir, double fov);
 t_ray		ray(t_vector origin, t_vector dir);

@@ -3,24 +3,38 @@
 CC = cc
 RM = rm -f
 
-CFLAGS = -Wall -Wextra -Werror -Imlx
+CFLAGS = -Wall -Wextra -Werror -g -Imlx
 MLXFLAGS = -lmlx -Lmlx -framework OpenGL -framework AppKit
 
 NAME = miniRT
-SRCS = main.c vector.c
+SRCS = main.c \
+		parse.c \
+		parse_obj.c \
+		parse_utils.c \
+		error.c
 OBJS = $(SRCS:.c=.o)
 DEPS = $(SRCS:.c=.d)
 MLX_DIR = ./mlx
 MLX_LIB = libmlx.dylib
+LIBFT_DIR = ./Libft/libft
+LIBFT_LIB = libft.a
+GNL_DIR = ./Libft/gnl
+GNL_LIB = libftgnl.a
 
 all : $(NAME)
 
-$(NAME) : $(OBJS) $(MLX_DIR)/$(MLX_LIB)
+$(NAME) : $(OBJS) $(MLX_DIR)/$(MLX_LIB) $(LIBFT_DIR)/$(LIBFT_LIB) $(GNL_DIR)/$(GNL_LIB)
 	$(CC) $(CFLAGS) $(MLXFLAGS) $^ -o $(NAME)
 	install_name_tool -change libmlx.dylib mlx/libmlx.dylib $(NAME)
 
 $(MLX_DIR)/$(MLX_LIB) :
 	make -C $(MLX_DIR)
+
+$(LIBFT_DIR)/$(LIBFT_LIB) :
+	make -C $(LIBFT_DIR)
+
+$(GNL_DIR)/$(GNL_LIB) :
+	make -C $(GNL_DIR)
 
 %.o : %.c
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -28,6 +42,8 @@ $(MLX_DIR)/$(MLX_LIB) :
 clean :
 	$(RM) $(OBJS) $(DEPS)
 	make clean -C $(MLX_DIR)
+	make clean -C $(GNL_DIR)
+	make clean -C $(LIBFT_DIR)
 
 fclean : clean
 	$(RM) $(NAME)

@@ -6,11 +6,9 @@
 /*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 14:53:11 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/03 14:53:12 by yakim            ###   ########.fr       */
+/*   Updated: 2024/04/09 17:02:14 by yakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "vector.h"
 
 //벡터3 생성자
 t_vec3	vec3(double x, double y, double z)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_struct.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgoo <jgoo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 10:32:01 by jgoo              #+#    #+#             */
-/*   Updated: 2024/04/09 10:37:26 by jgoo             ###   ########.fr       */
+/*   Updated: 2024/04/09 10:55:03 by yakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct s_darray
 	void	**arr;
 	int		size;
 	int		capacity;
+	int		data_type;
 }	t_darray;
 
 t_darray	*init_array(int capacity);

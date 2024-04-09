@@ -6,12 +6,11 @@
 /*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 19:12:19 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/09 17:02:10 by yakim            ###   ########.fr       */
+/*   Updated: 2024/04/09 20:42:55 by yakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
-#include "stdio.h"//
+#include "essential.h"
 
 int	ft_isspace(char c)
 {
@@ -118,7 +117,35 @@ void	print_parse_result(t_info *info)
 	printf("ambient:\n");
 	printf("ratio: %f\n", info->ambient.ratio);
 	printf("color: %f, %f, %f\n\n", info->ambient.color.d[0], info->ambient.color.d[1], info->ambient.color.d[2]);
-
+	int i = 0;
+	while (i < info->objarr->size)
+	{
+		t_obj *temp = info->objarr->arr[i];
+		if (temp->type == SPHERE)
+		{
+			printf("sphere:\n");
+			printf("center: %f, %f, %f\n", ((t_sphere *)(temp->ptr))->center.d[0], ((t_sphere *)(temp->ptr))->center.d[1], ((t_sphere *)(temp->ptr))->center.d[2]);
+			printf("diameter: %f\n", ((t_sphere *)(temp->ptr))->radius);
+			printf("color: %f, %f, %f\n\n", ((t_sphere *)(temp->ptr))->color.d[0], ((t_sphere *)(temp->ptr))->color.d[1], ((t_sphere *)(temp->ptr))->color.d[2]);
+		}
+		else if (temp->type == PLANE)
+		{
+			printf("plane:\n");
+			printf("point: %f, %f, %f\n", ((t_plane *)(temp->ptr))->point.d[0], ((t_plane *)(temp->ptr))->point.d[1], ((t_plane *)(temp->ptr))->point.d[2]);
+			printf("normal: %f, %f, %f\n", ((t_plane *)(temp->ptr))->normal.d[0], ((t_plane *)(temp->ptr))->normal.d[1], ((t_plane *)(temp->ptr))->normal.d[2]);
+			printf("color: %f, %f, %f\n\n", ((t_plane *)(temp->ptr))->color.d[0], ((t_plane *)(temp->ptr))->color.d[1], ((t_plane *)(temp->ptr))->color.d[2]);
+		}
+		else if (temp->type == CYLINDER)
+		{
+			printf("cylinder:\n");
+			printf("center: %f, %f, %f\n", ((t_cylinder *)(temp->ptr))->center.d[0], ((t_cylinder *)(temp->ptr))->center.d[1], ((t_cylinder *)(temp->ptr))->center.d[2]);
+			printf("normal: %f, %f, %f\n", ((t_cylinder *)(temp->ptr))->normal.d[0], ((t_cylinder *)(temp->ptr))->normal.d[1], ((t_cylinder *)(temp->ptr))->normal.d[2]);
+			printf("diameter: %f\n", ((t_cylinder *)(temp->ptr))->diameter);
+			printf("height: %f\n", ((t_cylinder *)(temp->ptr))->height);
+			printf("color: %f, %f, %f\n\n", ((t_cylinder *)(temp->ptr))->color.d[0], ((t_cylinder *)(temp->ptr))->color.d[1], ((t_cylinder *)(temp->ptr))->color.d[2]);
+		}
+		i++;
+	}
 }
 
 void	parse(int argc, char **argv, t_info *info)
@@ -138,6 +165,7 @@ void	parse(int argc, char **argv, t_info *info)
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
 		cus_error("Error\nOpen error\n");
+	info->objarr = init_array(0);
 	line = get_next_line(fd);
 	while (line)
 	{
@@ -147,10 +175,11 @@ void	parse(int argc, char **argv, t_info *info)
 		{
 			newline = malloc(ft_strlen(line));
 			ft_strlcpy(newline, line, ft_strlen(line));
+			free(line);
 		}
 		else
 			newline = line;
-		printf("%s\n", newline);
+		// printf("%s\n", newline);
 		parse_object(newline, info);
 		free(newline);
 		line = get_next_line(fd);

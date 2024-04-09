@@ -6,14 +6,16 @@
 /*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 14:54:50 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/09 17:02:05 by yakim            ###   ########.fr       */
+/*   Updated: 2024/04/09 19:29:56 by yakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef OBJECT_H
 # define OBJECT_H
 
-# include "essential.h"
+# include "data_struct.h"
+
+typedef struct s_darray t_darray;
 
 typedef enum e_type
 {
@@ -72,6 +74,15 @@ typedef struct s_plane
 	t_vector	color;
 }	t_plane;
 
+typedef struct s_cylinder
+{
+	t_vector	center;
+	t_vector	normal;
+	double		diameter;
+	double		height;
+	t_vector	color;
+}	t_cylinder;
+
 typedef struct s_info
 {
 	void		*mlx;
@@ -79,12 +90,9 @@ typedef struct s_info
 	t_ambient	ambient;
 	t_camera	camera;
 	t_light		light;
-	t_darray	objarr;
+	t_darray	*objarr;
 }	t_info;
 
-t_camera	camera(t_vector origin, t_vector dir, double fov);
-t_ray		ray(t_vector origin, t_vector dir);
-t_sphere	sphere(t_vector center, double radius, t_vector color);
-t_plane		plane(t_vector point, t_vector normal, t_vector color);
+t_obj	*init_obj(t_type type);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 10:35:04 by jgoo              #+#    #+#             */
-/*   Updated: 2024/04/09 10:55:01 by yakim            ###   ########.fr       */
+/*   Updated: 2024/04/09 20:16:39 by yakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	copy_array(void **dst, void **src, int size)
 void	free_array(t_darray *array)
 {
 	int	i;
-	
+
 	if (array == NULL)
 		return ;
 	i = -1;

@@ -11,6 +11,8 @@ SRCS = main.c \
 		parse.c \
 		parse_obj.c \
 		parse_utils.c \
+		object.c \
+		darray.c \
 		error.c
 OBJS = $(SRCS:.c=.o)
 DEPS = $(SRCS:.c=.d)

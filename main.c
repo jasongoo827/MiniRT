@@ -6,7 +6,7 @@
 /*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:36:40 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/09 16:19:06 by yakim            ###   ########.fr       */
+/*   Updated: 2024/04/09 20:40:56 by yakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,7 @@
 
 int	win_init(void *mlx, void **win)
 {
-	int	x_max;
-	int	y_max;
-
-	mlx_get_screen_size(mlx, &x_max, &y_max);
-	*win = mlx_new_window(mlx, 500, 500, "win");
+	*win = mlx_new_window(mlx, 2560, 1440, "win");
 	mlx_clear_window(mlx, *win);
 	return (0);
 }

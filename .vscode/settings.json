@@ -5,6 +5,8 @@
 		"libft.h": "c",
 		"error.h": "c",
 		"essential.h": "c",
-		"chrono": "c"
+		"chrono": "c",
+		"object.h": "c",
+		"data_struct.h": "c"
 	}
 }

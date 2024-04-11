@@ -13,7 +13,13 @@ SRCS = main.c \
 		parse_utils.c \
 		object.c \
 		darray.c \
-		error.c
+		error.c \
+		math_vector.c \
+		math_vector2.c \
+		matrix.c \
+		scene.c \
+		settings.c
+		
 OBJS = $(SRCS:.c=.o)
 DEPS = $(SRCS:.c=.d)
 MLX_DIR = ./mlx

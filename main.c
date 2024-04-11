@@ -3,16 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jgoo <jgoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:36:40 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/09 20:40:56 by yakim            ###   ########.fr       */
+/*   Updated: 2024/04/11 16:55:07 by jgoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mlx.h"
 #include "minirt.h"
 #include "object.h"
+#include "scene.h"
+#include "parse.h"
 
 int	win_init(void *mlx, void **win)
 {
@@ -42,10 +44,11 @@ int	main(int argc, char **argv)
 
 	//parsing start
 	parse(argc, argv, &info);
-	print_parse_result(&info);
+	// print_parse_result(&info);
 	//parsing end
-
-
+	
+	// set scene
+	set_scene(&info);
 	// mlx_hook(info.win, 17, 0, ft_close, &info);
 	// mlx_loop(info.mlx);
 }

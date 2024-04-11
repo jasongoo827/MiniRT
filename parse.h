@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jgoo <jgoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 13:22:14 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/09 20:39:07 by yakim            ###   ########.fr       */
+/*   Updated: 2024/04/11 15:04:00 by jgoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PARSE_H
 
 # include "essential.h"
+# include "object.h"
 
 void		parse(int argc, char **argv, t_info *info);
 void		parse_object(char *line, t_info *info);

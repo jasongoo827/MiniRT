@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jgoo <jgoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 19:12:19 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/09 20:42:55 by yakim            ###   ########.fr       */
+/*   Updated: 2024/04/11 15:05:05 by jgoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "essential.h"
+#include "object.h"
+#include "parse.h"
 
 int	ft_isspace(char c)
 {

@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   object.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jgoo <jgoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 14:53:03 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/09 20:14:43 by yakim            ###   ########.fr       */
+/*   Updated: 2024/04/11 16:23:36 by jgoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "essential.h"
+#include "object.h"
 
 t_obj	*init_obj(t_type type)
 {

@@ -7,6 +7,11 @@
 		"essential.h": "c",
 		"chrono": "c",
 		"object.h": "c",
-		"data_struct.h": "c"
+		"data_struct.h": "c",
+		"algorithm": "c",
+		"stdlib.h": "c",
+		"parse.h": "c",
+		"iosfwd": "c",
+		"iterator": "c"
 	}
 }

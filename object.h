@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jgoo <jgoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 14:54:50 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/09 19:29:56 by yakim            ###   ########.fr       */
+/*   Updated: 2024/04/11 14:56:23 by jgoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define OBJECT_H
 
 # include "data_struct.h"
+# include "matrix.h"
 
 typedef struct s_darray t_darray;
 
@@ -25,6 +26,8 @@ typedef enum e_type
 	PLANE,
 	CYLINDER
 }	t_type;
+
+typedef struct s_vector t_vector;
 
 typedef struct s_camera
 {

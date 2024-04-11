@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jgoo <jgoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 14:41:50 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/09 20:37:45 by yakim            ###   ########.fr       */
+/*   Updated: 2024/04/11 16:23:22 by jgoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "essential.h"
+#include "parse.h"
 
 void	free_split(char **arr)
 {

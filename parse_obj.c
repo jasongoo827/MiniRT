@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   parse_obj.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jgoo <jgoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 12:52:57 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/09 20:40:20 by yakim            ###   ########.fr       */
+/*   Updated: 2024/04/11 16:23:06 by jgoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "essential.h"
+#include "parse.h"
 
 void	parse_ambient(char **arr, t_info *info)
 {

@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   darray.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jgoo <jgoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 10:35:04 by jgoo              #+#    #+#             */
-/*   Updated: 2024/04/09 20:16:39 by yakim            ###   ########.fr       */
+/*   Updated: 2024/04/11 16:23:48 by jgoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "data_struct.h"
+#include "error.h"
 
 t_darray	*init_array(int capacity)
 {

@@ -6,7 +6,7 @@
 /*   By: jgoo <jgoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 10:32:01 by jgoo              #+#    #+#             */
-/*   Updated: 2024/04/09 10:37:26 by jgoo             ###   ########.fr       */
+/*   Updated: 2024/04/09 10:54:49 by jgoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 typedef struct s_darray
 {
 	void	**arr;
+	int		data_type;
 	int		size;
 	int		capacity;
 }	t_darray;

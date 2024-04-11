@@ -7,5 +7,6 @@
 
 // error.c
 void	null_check(void *ptr);
+void	cus_error(char *message);
 
 #endif

@@ -26,9 +26,9 @@ t_vector *r1, t_vector *r2)
 	l_matrix->d[0][3] = 0;
 	l_matrix->d[1][3] = 0;
 	l_matrix->d[2][3] = 0;
-	l_matrix->d[3][0] = dot(eye_position, r0);
-	l_matrix->d[3][1] = dot(eye_position, r1);
-	l_matrix->d[3][2] = dot(eye_position, r2);
+	l_matrix->d[3][0] = -dot(eye_position, r0);
+	l_matrix->d[3][1] = -dot(eye_position, r1);
+	l_matrix->d[3][2] = -dot(eye_position, r2);
 	l_matrix->d[3][3] = 1;
 	return (l_matrix);
 }
@@ -48,9 +48,9 @@ t_matrix	*get_look_at_matrix(t_camera *camera)
 	normalize_vector(&eye_direction); // r2
 	cross(&r0, &eye_direction, &up_direction);
 	normalize_vector(&r0);
-	camera->horizontal = vec4(r0.d[X], r0.d[Y], r0.d[Z], r0.d[W]);
+	camera->horizontal = vec4(-r0.d[X], -r0.d[Y], -r0.d[Z], r0.d[W]);
 	cross(&r1, &eye_direction, &r0);
 	normalize_vector(&r1);
-	camera->vertical = vec4(r1.d[X], r1.d[Y], r1.d[Z], r1.d[W]);
+	camera->vertical = vec4(-r1.d[X], -r1.d[Y], -r1.d[Z], r1.d[W]);
 	return (init_look_at_matrix(&camera->origin, &r0, &r1, &eye_direction));
 }

@@ -47,8 +47,8 @@ double	dot(t_vector *v1, t_vector *v2)
 	double		y;
 	double		z;
 
-	x = v1->d[X] * v2->d[X] * (-1);
-	y = v1->d[Y] * v2->d[Y] * (-1);
-	z = v1->d[Z] * v2->d[Z] * (-1);
+	x = v1->d[X] * v2->d[X];
+	y = v1->d[Y] * v2->d[Y];
+	z = v1->d[Z] * v2->d[Z];
 	return (x + y + z);
 }

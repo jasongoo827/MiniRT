@@ -12,6 +12,7 @@
 		"stdlib.h": "c",
 		"parse.h": "c",
 		"iosfwd": "c",
-		"iterator": "c"
+		"iterator": "c",
+		"scene.h": "c"
 	}
 }

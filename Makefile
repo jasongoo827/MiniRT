@@ -12,12 +12,14 @@ SRCS = main.c \
 		parse_obj.c \
 		parse_utils.c \
 		object.c \
+		hit_obj.c \
 		darray.c \
 		error.c \
 		math_vector.c \
 		math_vector2.c \
 		matrix.c \
 		scene.c \
+		phong.c \
 		settings.c
 		
 OBJS = $(SRCS:.c=.o)

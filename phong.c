@@ -6,7 +6,7 @@
 /*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 16:46:21 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/12 19:00:42 by yakim            ###   ########.fr       */
+/*   Updated: 2024/04/12 19:20:37 by yakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ t_vector	phong_lightning(t_info *info)
 	d = dot(&lp, &info->record.n);
 	if (d < 0)
 		d = 0;
-	color.d[X] += d * info->light.color.d[X] / 255.999 * info->light.ratio;
-	color.d[Y] += d * info->light.color.d[Y] / 255.999 * info->light.ratio;
-	color.d[Z] += d * info->light.color.d[Z] / 255.999 * info->light.ratio;
+	color.d[X] += d * info->light.color.d[X] / 255.999 * info->light.ratio * info->record.color.d[X] / 255.999;
+	color.d[Y] += d * info->light.color.d[Y] / 255.999 * info->light.ratio * info->record.color.d[Y] / 255.999;
+	color.d[Z] += d * info->light.color.d[Z] / 255.999 * info->light.ratio * info->record.color.d[Z] / 255.999;
 	return (color);
 }

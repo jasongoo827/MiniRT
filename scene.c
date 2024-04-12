@@ -1,4 +1,5 @@
 #include "scene.h"
+#include "light.h"
 
 void	write_color(t_vector vector)
 {
@@ -24,12 +25,13 @@ int	hit_sphere(t_ray ray, t_sphere sphere)
 	return (discriminant > 0);
 }
 
-t_vector	ray_color(t_ray ray, t_sphere sphere)
+t_vector	ray_color(t_info *info, t_ray ray)
 {
 	double	t;
 
-	if (hit_sphere(ray, sphere))
-		return (vec4(1, 0, 0, 1));
+	hit_obj(info, ray);
+	if (info->record.ishit)
+		return (phong_lightning(info));
 	else
 	{
 		t = 0.5 * (ray.dir.d[Y]  + 1.0);
@@ -44,10 +46,6 @@ void	render(t_info *info, t_canvas canvas, t_viewport viewport)
 	double	u;
 	double	v;
 	t_ray	ray;
-	t_sphere	sphere;
-
-	sphere.center = vec4(0, 0, -5, 1);
-	sphere.radius = 2.0;
 
 	j = canvas.height;
 	printf("P3\n%d %d\n255\n", canvas.width, canvas.height);
@@ -59,7 +57,7 @@ void	render(t_info *info, t_canvas canvas, t_viewport viewport)
 			u = (double)i / (canvas.width - 1);
 			v = (double)j / (canvas.height - 1);
 			ray = set_ray(info->camera, u, v, viewport);
-			write_color(ray_color(ray, sphere));
+			write_color(ray_color(info, ray));
 		}
 	}
 }

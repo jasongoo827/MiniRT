@@ -23,7 +23,7 @@ t_viewport	set_viewport(t_camera camera, t_canvas canvas)
 	hor = vec_scala(camera.horizontal, viewport.v_width);
 	ver = vec_scala(camera.vertical, viewport.v_height);
 
-	viewport.left_bottom = vec_minus(vec_minus(vec_minus(camera.origin, \
+	viewport.left_bottom = vec_plus(vec_minus(vec_minus(camera.origin, \
 	vec_scala(hor, 0.5)), vec_scala(ver, 0.5)), camera.dir);
 	// printf("%lf %lf %lf\n", viewport.left_bottom.d[X], viewport.left_bottom.d[Y], viewport.left_bottom.d[Z]);
 	return (viewport);

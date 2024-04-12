@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgoo <jgoo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 11:34:51 by jgoo              #+#    #+#             */
-/*   Updated: 2024/04/12 13:35:46 by jgoo             ###   ########.fr       */
+/*   Updated: 2024/04/12 14:49:42 by yakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "essential.h"
 # include "matrix.h"
+# include "object.h"
 
 # define WIDTH 1920
 # define HEIGHT 1080
@@ -39,7 +40,7 @@ t_viewport	set_viewport(t_camera camera, t_canvas canvas);
 t_ray		set_ray(t_camera camera, double u, double v, t_viewport viewport);
 
 // scene.c
-t_vector	ray_color(t_ray ray, t_sphere sphere);
+t_vector	ray_color(t_info *info, t_ray ray);
 void		render(t_info *info, t_canvas canvas, t_viewport viewport);
 void		set_scene(t_info *info);
 

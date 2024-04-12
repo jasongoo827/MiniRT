@@ -46,8 +46,8 @@ void	render(t_info *info, t_canvas canvas, t_viewport viewport)
 	t_ray	ray;
 	t_sphere	sphere;
 
-	sphere.center = vec4(0, 0, -5, 1);
-	sphere.radius = 2.0;
+	sphere.center = vec4(0, 0, 100, 1);
+	sphere.radius = 20.0;
 
 	j = canvas.height;
 	printf("P3\n%d %d\n255\n", canvas.width, canvas.height);

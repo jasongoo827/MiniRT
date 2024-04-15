@@ -34,6 +34,8 @@ t_vector	ray_color(t_info *info, t_ray ray)
 	if (record.ishit)
 	{
 		info->record = record;
+		// check texture
+		checkerboard(info);
 		return (phong_lightning(info));
 	}
 	else
@@ -70,12 +72,9 @@ void	set_scene(t_info *info)
 {
 	t_canvas	canvas;
 	t_viewport	viewport;
-	// t_matrix	*matrix;
 
-	// matrix = get_look_at_matrix(&info->camera);
 	get_axis(&info->camera);
 	canvas = set_canvas();
 	viewport = set_viewport(info->camera, canvas);
-	// render
 	render(info, canvas, viewport);
 }

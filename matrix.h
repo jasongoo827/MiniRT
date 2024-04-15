@@ -6,7 +6,7 @@
 /*   By: jgoo <jgoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 14:22:31 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/15 11:21:43 by jgoo             ###   ########.fr       */
+/*   Updated: 2024/04/15 18:29:09 by jgoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ typedef	struct s_camera	t_camera;
 t_matrix	*alloc_matrix(void);
 t_matrix	*init_look_at_matrix(t_vector *eye_position, t_vector *r0, \
 t_vector *r1, t_vector *r2);
-t_matrix	*get_look_at_matrix(t_camera *camera);
 void		get_axis(t_camera *camera);
 
 // math_vector.c

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jgoo <jgoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 11:34:51 by jgoo              #+#    #+#             */
-/*   Updated: 2024/04/12 14:49:42 by yakim            ###   ########.fr       */
+/*   Updated: 2024/04/15 19:32:05 by jgoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_canvas
 t_canvas	set_canvas(void);
 t_viewport	set_viewport(t_camera camera, t_canvas canvas);
 t_ray		set_ray(t_camera camera, double u, double v, t_viewport viewport);
+void		checkerboard(t_info *info);
 
 // scene.c
 t_vector	ray_color(t_info *info, t_ray ray);

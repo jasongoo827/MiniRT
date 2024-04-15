@@ -30,3 +30,12 @@ t_vector	vec_scala(t_vector v, double scala)
 	return (ret);
 }
 
+t_vector	vec_product(t_vector v1, t_vector v2)
+{
+	t_vector	ret;
+
+	ret.d[X] = v1.d[X] * v2.d[X];
+	ret.d[Y] = v1.d[Y] * v2.d[Y];
+	ret.d[Z] = v1.d[Z] * v2.d[Z];
+	return (ret);
+}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matrix.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgoo <jgoo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 14:22:31 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/15 11:21:43 by jgoo             ###   ########.fr       */
+/*   Updated: 2024/04/15 17:48:41 by yakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,6 @@ int			cmp_vec(t_vector v1, t_vector v2);
 t_vector	vec_minus(t_vector v1, t_vector v2);
 t_vector	vec_plus(t_vector v1, t_vector v2);
 t_vector	vec_scala(t_vector v, double scala);
+t_vector	vec_product(t_vector v1, t_vector v2);
 
 #endif

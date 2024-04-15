@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgoo <jgoo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 13:22:14 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/11 15:04:00 by jgoo             ###   ########.fr       */
+/*   Updated: 2024/04/15 17:36:20 by yakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 void		parse(int argc, char **argv, t_info *info);
 void		parse_object(char *line, t_info *info);
-t_vector	parse_vector(char **arr, int isnormalized, int ispoint);
+t_vector	parse_vector(char **arr, int isnorm, int ispoint, int iscolor);
 void		parse_ambient(char ** arr, t_info *info);
 void		parse_camera(char ** arr, t_info *info);
 void		parse_light(char ** arr, t_info *info);

@@ -6,7 +6,7 @@
 /*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 13:38:28 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/15 12:26:00 by yakim            ###   ########.fr       */
+/*   Updated: 2024/04/15 16:16:01 by yakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	hit_obj_sphere(t_info *info, t_ray ray, t_hit *record, t_sphere *sphere)
 	double		c;
 	double		discriminant;
 
+	(void)info;
 	oc = vec_minus(ray.origin, sphere->center);
 	a = dot(&ray.dir, &ray.dir);
 	b = dot(&oc, &ray.dir);
@@ -47,7 +48,7 @@ void	hit_obj_sphere(t_info *info, t_ray ray, t_hit *record, t_sphere *sphere)
 			{
 				record->ishit = 1;
 				record->t = tempt;
-				record->point = vec_plus(info->camera.origin, vec_scala(ray.dir, record->t));
+				record->point = vec_plus(ray.origin, vec_scala(ray.dir, record->t));
 				record->n = vec_minus(record->point, sphere->center);
 				normalize_vector(&record->n);
 				if (dot(&record->n, &ray.dir) > 0)
@@ -62,7 +63,7 @@ void	hit_obj_sphere(t_info *info, t_ray ray, t_hit *record, t_sphere *sphere)
 			{
 				record->ishit = 1;
 				record->t = tempt;
-				record->point = vec_plus(info->camera.origin, vec_scala(ray.dir, record->t));
+				record->point = vec_plus(ray.origin, vec_scala(ray.dir, record->t));
 				record->n = vec_minus(record->point, sphere->center);
 				normalize_vector(&record->n);
 				if (dot(&record->n, &ray.dir) > 0)
@@ -79,6 +80,7 @@ void	hit_obj_plane(t_info *info, t_ray ray, t_hit *record, t_plane *plane)
 	double		divider;
 	t_vector	oc;
 
+	(void)info;
 	divider = dot(&ray.dir, &plane->normal);
 	if (divider == 0)
 		return ;
@@ -90,7 +92,7 @@ void	hit_obj_plane(t_info *info, t_ray ray, t_hit *record, t_plane *plane)
 		{
 			record->ishit = 1;
 			record->t = tempt;
-			record->point = vec_plus(info->camera.origin, vec_scala(ray.dir, record->t));
+			record->point = vec_plus(ray.origin, vec_scala(ray.dir, record->t));
 			record->n = plane->normal;
 			if (dot(&record->n, &ray.dir) > 0)
 				record->n = vec_scala(record->n, -1);
@@ -107,10 +109,9 @@ void	hit_obj_cylinder(t_info *info, t_ray ray, t_hit *record, t_sphere *sphere)
 	(void)record;
 }
 
-t_hit	hit_obj(t_info *info, t_ray ray)
+t_hit	hit_obj(t_info *info, t_ray ray, t_hit record)
 {
 	int		i;
-	t_hit	record;
 
 	i = 0;
 	init_record(&record);

@@ -8,4 +8,6 @@
 # include "./Libft/libft/libft.h"
 # include "./Libft/gnl/get_next_line.h"
 
+# define BONUS 1
+
 #endif

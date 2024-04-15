@@ -6,7 +6,7 @@
 /*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 16:46:21 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/15 18:35:46 by yakim            ###   ########.fr       */
+/*   Updated: 2024/04/15 20:08:38 by yakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,22 @@
 #include "object.h"
 #include "matrix.h"
 #include "light.h"
+
+void	check_color_bound(t_vector *color)
+{
+	if (color->d[X] > 1)
+		color->d[X] = 1;
+	if (color->d[Y] > 1)
+		color->d[Y] = 1;
+	if (color->d[Z] > 1)
+		color->d[Z] = 1;
+	if (color->d[X] < 0)
+		color->d[X] = 0;
+	if (color->d[Y] < 0)
+		color->d[Y] = 0;
+	if (color->d[Z] < 0)
+		color->d[Z] = 0;
+}
 
 int	check_shadow(t_info *info)
 {
@@ -35,12 +51,12 @@ int	check_shadow(t_info *info)
 
 t_vector	diffuse(t_info *info, t_vector *lp)
 {
-	double		d;
+	double		cos;
 
-	d = dot(lp, &info->record.n);
-	if (d < 0)
-		d = 0;
-	return (vec_scala(info->light.color, d * info->light.ratio));
+	cos = dot(lp, &info->record.n);
+	if (cos < 0)
+		cos = 0;
+	return (vec_scala(info->light.color, cos * info->light.ratio));
 }
 
 t_vector	specular(t_info *info, t_vector *lp)
@@ -48,17 +64,18 @@ t_vector	specular(t_info *info, t_vector *lp)
 	t_vector	v;
 	t_vector	dot_nv;
 	t_vector	reflect;
-	double		d;
+	double		cos;
 
+	if (BONUS == 0)
+		return (vec4(0, 0, 0, 0));
 	v = vec_minus(info->camera.origin, info->record.point);
 	dot_nv = vec_scala(info->record.n, dot(&v, &info->record.n) * 2);
 	reflect = vec_plus(vec_scala(v, -1), dot_nv);
 	normalize_vector(&reflect);
-	d = dot(lp, &reflect);
-	if (d < 0)
-		d = 0;
-    double spec = pow(d, SHINE);
-    return (vec_scala(vec_scala(vec_scala(info->light.color, SPECULAR), spec), info->light.ratio));
+	cos = dot(lp, &reflect);
+	if (cos < 0)
+		cos = 0;
+	return (vec_scala(vec_scala(vec_scala(info->light.color, SPECULAR), pow(cos, SHINE)), info->light.ratio));
 }
 
 t_vector	phong_lightning(t_info *info)
@@ -79,17 +96,6 @@ t_vector	phong_lightning(t_info *info)
 	color = vec_plus(color, specular(info, &lp));
 	//min, maxing
 	color = vec_product(info->record.color, color);
-	if (color.d[X] > 1)
-		color.d[X] = 1;
-	if (color.d[Y] > 1)
-		color.d[Y] = 1;
-	if (color.d[Z] > 1)
-		color.d[Z] = 1;
-	if (color.d[X] < 0)
-		color.d[X] = 0;
-	if (color.d[Y] < 0)
-		color.d[Y] = 0;
-	if (color.d[Z] < 0)
-		color.d[Z] = 0;
+	check_color_bound(&color);
 	return (color);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgoo <jgoo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 19:12:19 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/11 15:05:05 by jgoo             ###   ########.fr       */
+/*   Updated: 2024/04/15 19:40:22 by yakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,7 @@ double	ft_strtod(const char *str)
 	while (*str && *str != '.')
 	{
 		if (ft_isdigit(*str) == 0 && *str != '.')
-		{
 			cus_error("Error\nInput error\n");
-		}
 		d = (d * 10) + (double)(*str - '0');
 		str++;
 	}
@@ -58,7 +56,6 @@ double	ft_strtod(const char *str)
 		d += (*str - '0') * n;
 		n /= 10;
 		str++;
-		//n에 의한 오차 발생 가능함.
 	}
 	if (sign)
 		return (d * -1);

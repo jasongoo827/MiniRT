@@ -16,8 +16,11 @@ t_viewport	set_viewport(t_camera camera, t_canvas canvas)
 	t_vector	hor;
 	t_vector	ver;
 
-	viewport.v_height = 2.0;
+	// viewport.v_height = 2.0;
+	viewport.v_height = 2 * tan(camera.fov / 2);
 	viewport.v_width = viewport.v_height * canvas.aspect_ratio;
+	// printf("v_height: %lf\n", viewport.v_height);
+	// printf("v_width: %lf\n", viewport.v_width);
 	// printf("h: %lf %lf %lf\n", camera.horizontal.d[X], camera.horizontal.d[Y], camera.horizontal.d[Z]);
 	// printf("v: %lf %lf %lf\n", camera.vertical.d[X], camera.vertical.d[Y], camera.vertical.d[Z]);
 	hor = vec_scala(camera.horizontal, viewport.v_width);

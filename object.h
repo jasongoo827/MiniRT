@@ -6,7 +6,7 @@
 /*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 14:54:50 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/12 16:42:08 by yakim            ###   ########.fr       */
+/*   Updated: 2024/04/12 21:21:37 by yakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ typedef struct s_info
 t_obj	*init_obj(t_type type);
 void	hit_obj(t_info *info, t_ray ray);
 void	hit_obj_sphere(t_info *info, t_ray ray, t_sphere *sphere);
-void	hit_obj_plane(t_info *info, t_ray ray, t_sphere *sphere);
-void	hit_obj_cylinder(t_info *info, t_ray ray, t_sphere *sphere);
+void	hit_obj_plane(t_info *info, t_ray ray, t_plane *plane);
+void	hit_obj_cylinder(t_info *info, t_ray ray, t_sphere *cylinder);
 
 #endif

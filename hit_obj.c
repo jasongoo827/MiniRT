@@ -6,25 +6,25 @@
 /*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 13:38:28 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/15 11:33:25 by yakim            ###   ########.fr       */
+/*   Updated: 2024/04/15 12:26:00 by yakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "essential.h"
 #include "object.h"
 
-void	init_record(t_info *info)
+void	init_record(t_hit *record)
 {
-	info->record.ishit = 0;
-	info->record.t = 0;
-	info->record.color.d[X] = 0;
-	info->record.color.d[Y] = 0;
-	info->record.color.d[Z] = 0;
-	info->record.color.d[W] = 0;
+	record->ishit = 0;
+	record->t = 0;
+	record->color.d[X] = 0;
+	record->color.d[Y] = 0;
+	record->color.d[Z] = 0;
+	record->color.d[W] = 0;
 }
 
 
-void	hit_obj_sphere(t_info *info, t_ray ray, t_sphere *sphere)
+void	hit_obj_sphere(t_info *info, t_ray ray, t_hit *record, t_sphere *sphere)
 {
 	t_vector	oc;
 	double		a;
@@ -43,81 +43,86 @@ void	hit_obj_sphere(t_info *info, t_ray ray, t_sphere *sphere)
 		double tempt = (-1 * b - sqrt(discriminant)) / a;
 		if (tempt >= 0)
 		{
-			if (info->record.ishit == 0 || (info->record.ishit && tempt < info->record.t))
+			if (record->ishit == 0 || (record->ishit && tempt < record->t))
 			{
-				info->record.ishit = 1;
-				info->record.t = tempt;
-				info->record.point = vec_plus(info->camera.origin, vec_scala(ray.dir, info->record.t));
-				info->record.n = vec_minus(info->record.point, sphere->center);
-				normalize_vector(&info->record.n);
-				if (dot(&info->record.n, &ray.dir) > 0)
-					info->record.n = vec_scala(info->record.n, -1);
-				info->record.color = sphere->color;
+				record->ishit = 1;
+				record->t = tempt;
+				record->point = vec_plus(info->camera.origin, vec_scala(ray.dir, record->t));
+				record->n = vec_minus(record->point, sphere->center);
+				normalize_vector(&record->n);
+				if (dot(&record->n, &ray.dir) > 0)
+					record->n = vec_scala(record->n, -1);
+				record->color = sphere->color;
 			}
 		}
 		tempt = (-1 * b + sqrt(discriminant)) / a;
 		if (tempt >= 0)
 		{
-			if (info->record.ishit == 0 || (info->record.ishit && tempt < info->record.t))
+			if (record->ishit == 0 || (record->ishit && tempt < record->t))
 			{
-				info->record.ishit = 1;
-				info->record.t = tempt;
-				info->record.point = vec_plus(info->camera.origin, vec_scala(ray.dir, info->record.t));
-				info->record.n = vec_minus(info->record.point, sphere->center);
-				normalize_vector(&info->record.n);
-				if (dot(&info->record.n, &ray.dir) > 0)
-					info->record.n = vec_scala(info->record.n, -1);
-				info->record.color = sphere->color;
+				record->ishit = 1;
+				record->t = tempt;
+				record->point = vec_plus(info->camera.origin, vec_scala(ray.dir, record->t));
+				record->n = vec_minus(record->point, sphere->center);
+				normalize_vector(&record->n);
+				if (dot(&record->n, &ray.dir) > 0)
+					record->n = vec_scala(record->n, -1);
+				record->color = sphere->color;
 			}
 		}
 	}
 }
 
-void	hit_obj_plane(t_info *info, t_ray ray, t_plane *plane)
+void	hit_obj_plane(t_info *info, t_ray ray, t_hit *record, t_plane *plane)
 {
-	double	tempt;
-	double	divider;
+	double		tempt;
+	double		divider;
+	t_vector	oc;
 
 	divider = dot(&ray.dir, &plane->normal);
 	if (divider == 0)
 		return ;
-	tempt = dot(&plane->point, &plane->normal) / divider;
+	oc = vec_minus(plane->point, ray.origin);
+	tempt = dot(&oc, &plane->normal) / divider;
 	if (tempt >= 0)
 	{
-		if (info->record.ishit == 0 || (info->record.ishit && tempt < info->record.t))
+		if (record->ishit == 0 || (record->ishit && tempt < record->t))
 		{
-			info->record.ishit = 1;
-			info->record.t = tempt;
-			info->record.point = vec_plus(info->camera.origin, vec_scala(ray.dir, info->record.t));
-			info->record.n = plane->normal;
-			if (dot(&info->record.n, &ray.dir) > 0)
-				info->record.n = vec_scala(info->record.n, -1);
-			info->record.color = plane->color;
+			record->ishit = 1;
+			record->t = tempt;
+			record->point = vec_plus(info->camera.origin, vec_scala(ray.dir, record->t));
+			record->n = plane->normal;
+			if (dot(&record->n, &ray.dir) > 0)
+				record->n = vec_scala(record->n, -1);
+			record->color = plane->color;
 		}
 	}
 }
 
-void	hit_obj_cylinder(t_info *info, t_ray ray, t_sphere *sphere)
+void	hit_obj_cylinder(t_info *info, t_ray ray, t_hit *record, t_sphere *sphere)
 {
 	(void)info;
 	(void)ray;
 	(void)sphere;
+	(void)record;
 }
 
-void	hit_obj(t_info *info, t_ray ray)
+t_hit	hit_obj(t_info *info, t_ray ray)
 {
-	int	i;
+	int		i;
+	t_hit	record;
 
 	i = 0;
-	init_record(info);
+	init_record(&record);
 	while (i < info->objarr->size)
 	{
 		if (((t_obj *)(info->objarr->arr[i]))->type == SPHERE)
-			hit_obj_sphere(info, ray, ((t_obj *)(info->objarr->arr[i]))->ptr);
+			hit_obj_sphere(info, ray, &record, ((t_obj *)(info->objarr->arr[i]))->ptr);
 		else if (((t_obj *)(info->objarr->arr[i]))->type == PLANE)
-			hit_obj_plane(info, ray, ((t_obj *)(info->objarr->arr[i]))->ptr);
+			hit_obj_plane(info, ray, &record, ((t_obj *)(info->objarr->arr[i]))->ptr);
 		// else if (((t_obj *)(info->objarr->arr[i]))->type == CYLINDER)
 		// 	hit_obj_cylinder(info, ray, ((t_obj *)(info->objarr->arr[i]))->ptr);
 		i++;
 	}
+	return (record);
 }

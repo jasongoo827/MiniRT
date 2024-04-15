@@ -87,9 +87,9 @@ void		get_axis(t_camera *camera)
 	cross(&r0, &eye_direction, &up_direction);
 	normalize_vector(&r0);
 	camera->horizontal = vec4(-r0.d[X], -r0.d[Y], -r0.d[Z], r0.d[W]);
-	printf("hor: %lf %lf %lf %lf\n", camera->horizontal.d[X], camera->horizontal.d[Y], camera->horizontal.d[Z], camera->horizontal.d[W]);
+	// printf("hor: %lf %lf %lf %lf\n", camera->horizontal.d[X], camera->horizontal.d[Y], camera->horizontal.d[Z], camera->horizontal.d[W]);
 	cross(&r1, &eye_direction, &r0);
 	normalize_vector(&r1);
 	camera->vertical = vec4(-r1.d[X], -r1.d[Y], -r1.d[Z], r1.d[W]);
-	printf("ver: %lf %lf %lf %lf\n", camera->vertical.d[X], camera->vertical.d[Y], camera->vertical.d[Z], camera->vertical.d[W]);
+	// printf("ver: %lf %lf %lf %lf\n", camera->vertical.d[X], camera->vertical.d[Y], camera->vertical.d[Z], camera->vertical.d[W]);
 }

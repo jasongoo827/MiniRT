@@ -28,10 +28,14 @@ int	hit_sphere(t_ray ray, t_sphere sphere)
 t_vector	ray_color(t_info *info, t_ray ray)
 {
 	double	t;
+	t_hit	record;
 
-	hit_obj(info, ray);
-	if (info->record.ishit)
+	record = hit_obj(info, ray);
+	if (record.ishit)
+	{
+		info->record = record;
 		return (phong_lightning(info));
+	}
 	else
 	{
 		t = 0.5 * (ray.dir.d[Y]  + 1.0);

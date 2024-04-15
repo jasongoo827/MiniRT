@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgoo <jgoo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 14:41:50 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/12 19:11:14 by jgoo             ###   ########.fr       */
+/*   Updated: 2024/04/15 12:34:55 by yakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,11 @@ t_vector	parse_vector(char **arr, int isnormalized, int ispoint)
 		v.d[3] = 1;
 	else
 		v.d[3] = 0;
-	// if (isnormalized && (pow(v.d[0], 2) + pow(v.d[1], 2) + pow(v.d[2], 2) != 1))
-	// {
-	// 	// printf("%.90f\n", pow(v.d[0], 2) + pow(v.d[1], 2)+ pow(v.d[2], 2));
-	// 	cus_error("Error\nNot normalized vector input\n");
-	// }
+	if (isnormalized && (pow(v.d[0], 2) + pow(v.d[1], 2) + pow(v.d[2], 2) != 1))
+	{
+		// printf("%.90f\n", pow(v.d[0], 2) + pow(v.d[1], 2)+ pow(v.d[2], 2));
+		cus_error("Error\nNot normalized vector input\n");
+	}
 	if (arr[i])
 		cus_error("Error\nMore arguments in vector input\n");
 	return (v);

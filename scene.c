@@ -30,7 +30,8 @@ t_vector	ray_color(t_info *info, t_ray ray)
 	double	t;
 	t_hit	record;
 
-	record = hit_obj(info, ray);
+	init_record(&record);
+	record = hit_obj(info, ray, record, 0);
 	if (record.ishit)
 	{
 		info->record = record;

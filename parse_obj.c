@@ -6,7 +6,7 @@
 /*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 12:52:57 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/15 17:36:15 by yakim            ###   ########.fr       */
+/*   Updated: 2024/04/15 20:19:13 by yakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void	parse_ambient(char **arr, t_info *info)
 {
-	char	**temp;
+	char		**temp;
 
 	if (arr[1] == NULL || arr[2] == NULL)
 		cus_error("Error\nNot enough arguments\n");

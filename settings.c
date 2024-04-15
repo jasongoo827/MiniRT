@@ -10,7 +10,7 @@ void	checkerboard(t_info *info)
 	jump = (x + y + z) % 2;
 	// printf("x: %d y: %d z: %d jump: %d\n", x, y, z, jump);
 	if (jump == 0)
-		info->record.color = vec4(255, 255, 255, 0);
+		info->record.color = vec4(1, 1, 1, 0);
 	else
 		info->record.color = vec4(0, 0, 0, 0);
 }

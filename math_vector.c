@@ -52,3 +52,14 @@ double	dot(t_vector *v1, t_vector *v2)
 	z = v1->d[Z] * v2->d[Z];
 	return (x + y + z);
 }
+
+int	cmp_vec(t_vector v1, t_vector v2)
+{
+	if (fabs(v1.d[X]) != fabs(v2.d[X]))
+		return (0);
+	if (fabs(v1.d[Y]) != fabs(v2.d[Y]))
+		return (0);
+	if (fabs(v1.d[Z]) != fabs(v2.d[Z]))
+		return (0);
+	return (1);
+}

@@ -66,9 +66,10 @@ void	set_scene(t_info *info)
 {
 	t_canvas	canvas;
 	t_viewport	viewport;
-	t_matrix	*matrix;
+	// t_matrix	*matrix;
 
-	matrix = get_look_at_matrix(&info->camera);
+	// matrix = get_look_at_matrix(&info->camera);
+	get_axis(&info->camera);
 	canvas = set_canvas();
 	viewport = set_viewport(info->camera, canvas);
 	// render

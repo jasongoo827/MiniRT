@@ -13,6 +13,7 @@ SRCS = main.c \
 		parse_utils.c \
 		object.c \
 		hit_obj.c \
+		hit_obj_cy.c \
 		darray.c \
 		error.c \
 		math_vector.c \

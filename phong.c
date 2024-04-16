@@ -6,7 +6,7 @@
 /*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 16:46:21 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/15 20:08:38 by yakim            ###   ########.fr       */
+/*   Updated: 2024/04/16 17:32:48 by yakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	check_shadow(t_info *info)
 	ray.dir = vec_minus(info->light.origin, info->record.point);
 	t_max = sqrt(dot(&ray.dir, &ray.dir));
 	normalize_vector(&ray.dir);
-	ray.origin = vec_plus(ray.origin, vec_scala(ray.dir, 0.001));
+	ray.origin = vec_plus(ray.origin, vec_scala(info->record.n, 0.001));
 	record_shadow = hit_obj(info, ray, record_shadow);
 	if (record_shadow.ishit && record_shadow.t < t_max)
 		return (1);
@@ -56,7 +56,7 @@ t_vector	diffuse(t_info *info, t_vector *lp)
 	cos = dot(lp, &info->record.n);
 	if (cos < 0)
 		cos = 0;
-	return (vec_scala(info->light.color, cos * info->light.ratio));
+	return (vec_scala(info->light.color, cos * info->light.ratio * DIFFUSE));
 }
 
 t_vector	specular(t_info *info, t_vector *lp)

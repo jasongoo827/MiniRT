@@ -41,6 +41,15 @@ void	cross(t_vector *ret, t_vector *v1, t_vector *v2)
 	ret->d[Z] = v1->d[X] * v2->d[Y] - v1->d[Y] * v2->d[X];
 }
 
+t_vector	cross_(t_vector *v1, t_vector *v2)
+{
+	t_vector	ret;
+	ret.d[X] = v1->d[Y] * v2->d[Z] - v1->d[Z] * v2->d[Y];
+	ret.d[Y] = v1->d[Z] * v2->d[X] - v1->d[X] * v2->d[Z];
+	ret.d[Z] = v1->d[X] * v2->d[Y] - v1->d[Y] * v2->d[X];
+	return (ret);
+}
+
 double	dot(t_vector *v1, t_vector *v2)
 {
 	double		x;
@@ -50,6 +59,18 @@ double	dot(t_vector *v1, t_vector *v2)
 	x = v1->d[X] * v2->d[X];
 	y = v1->d[Y] * v2->d[Y];
 	z = v1->d[Z] * v2->d[Z];
+	return (x + y + z);
+}
+
+double	dot_(t_vector v1, t_vector v2)
+{
+	double		x;
+	double		y;
+	double		z;
+
+	x = v1.d[X] * v2.d[X];
+	y = v1.d[Y] * v2.d[Y];
+	z = v1.d[Z] * v2.d[Z];
 	return (x + y + z);
 }
 

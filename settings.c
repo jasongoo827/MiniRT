@@ -2,14 +2,31 @@
 
 void	checkerboard(t_info *info)
 {
-	int	jump;
-	int	x = info->record.point.d[X] / 0.5;
-	int	y = info->record.point.d[Y] / 0.5;
-	int	z = info->record.point.d[Z] / 0.5;
+	// without uv mapping
+	// int	jump;
+	// int	x = (info->record.point.d[X]);
+	// int	y = (info->record.point.d[Y]);
+	// // int	z = (info->record.point.d[Z]);
 
-	jump = (x + y + z) % 2;
-	// printf("x: %d y: %d z: %d jump: %d\n", x, y, z, jump);
-	if (jump == 0)
+	// jump = (x + y) % 2;
+	// // printf("x: %d y: %d z: %d jump: %d\n", x, y, z, jump);
+	// if (jump == 0)
+	// 	info->record.color = vec4(1, 1, 1, 0);
+	// else
+	// 	info->record.color = vec4(0, 0, 0, 0);
+
+	// with uv mapping
+	double	theta = atan2(info->record.point.d[X], info->record.point.d[Z]);
+	double	radius = sqrt(pow(info->record.point.d[X], 2) + pow(info->record.point.d[Y], 2) \
+	+ pow(info->record.point.d[Z], 2));
+	double	phi = acos(info->record.point.d[Y] / radius);
+	// printf("theta: %lf phi: %lf\n", theta, phi);
+	double	raw_u = theta / (2.0 * M_PI);
+	double	u = 0.5 - raw_u;
+	double	v = 1 - phi / M_PI;
+	int	u2 = floor(u * 8);
+	int	v2 = floor(v * 8);
+	if ((u2 + v2) % 2 == 0)
 		info->record.color = vec4(1, 1, 1, 0);
 	else
 		info->record.color = vec4(0, 0, 0, 0);

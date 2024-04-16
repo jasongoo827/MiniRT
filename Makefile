@@ -58,6 +58,8 @@ clean :
 
 fclean : clean
 	$(RM) $(NAME)
+	$(RM) $(LIBFT_DIR)/$(LIBFT_LIB)
+	$(RM) $(GNL_DIR)/$(GNL_LIB)
 
 re : fclean all
 

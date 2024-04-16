@@ -24,12 +24,12 @@ void	checkerboard(t_info *info)
 	double	raw_u = theta / (2.0 * M_PI);
 	double	u = 0.5 - raw_u;
 	double	v = 1 - phi / M_PI;
-	int	u2 = floor(u * 8);
-	int	v2 = floor(v * 8);
+	int	u2 = floor(u * 32);
+	int	v2 = floor(v * 32);
 	if ((u2 + v2) % 2 == 0)
 		info->record.color = vec4(1, 1, 1, 0);
-	else
-		info->record.color = vec4(0, 0, 0, 0);
+	// else
+	// 	info->record.color = vec4(0, 0, 0, 0);
 }
 
 t_canvas	set_canvas(void)

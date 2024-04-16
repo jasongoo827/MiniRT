@@ -6,7 +6,7 @@
 /*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 16:58:21 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/15 18:32:30 by yakim            ###   ########.fr       */
+/*   Updated: 2024/04/16 17:33:54 by yakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "essential.h"
 # include "object.h"
 
+# define DIFFUSE 1
 # define SPECULAR 0.7
 # define SHINE 16
 

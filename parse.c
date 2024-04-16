@@ -6,7 +6,7 @@
 /*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 19:12:19 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/15 19:40:22 by yakim            ###   ########.fr       */
+/*   Updated: 2024/04/16 19:08:31 by yakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ double	ft_strtod(const char *str)
 
 	d = 0.0;
 	sign = 0;
+	if (str == NULL)
+		cus_error("Error\nInput error\n");
 	while (ft_isspace(*str))
 		str++;
 	if (*str == '-' | *str == '+')

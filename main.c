@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jgoo <jgoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:36:40 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/12 15:06:38 by yakim            ###   ########.fr       */
+/*   Updated: 2024/04/16 20:14:42 by jgoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 int	win_init(void *mlx, void **win)
 {
-	*win = mlx_new_window(mlx, 2560, 1440, "win");
+	*win = mlx_new_window(mlx, 1920, 1080, "minirt");
 	mlx_clear_window(mlx, *win);
 	return (0);
 }
@@ -34,21 +34,47 @@ void	l(void)
 	system("leaks $PPID");
 }
 
+static int	key_hook(int keycode, t_info *info)
+{
+	if (keycode == KEY_ESC)
+	{
+		mlx_destroy_window(info->mlx, info->win);
+		exit(0);
+	}
+	return (0);
+}
+
+static int	exit_window(t_info *info)
+{
+	mlx_destroy_window(info->mlx, info->win);
+	exit(0);
+}
+
+void	set_image(t_info *info)
+{
+	info->img.img_ptr = mlx_new_image(info->mlx, 1920, 1080);
+	info->img.addr = mlx_get_data_addr(info->img.img_ptr, \
+	&info->img.bits_per_pixel, &info->img.size_line, &info->img.endian);
+	// draw_image(&info->img, info->map);
+	set_scene(info);
+	mlx_put_image_to_window(info->mlx, info->win, \
+	info->img.img_ptr, 0, 0);
+}
+
 int	main(int argc, char **argv)
 {
 	t_info	info;
 
 	// atexit(l);
-	// info.mlx = mlx_init();
-	// win_init(info.mlx, &info.win);
+	info.mlx = mlx_init();
+	win_init(info.mlx, &info.win);
 
-	//parsing start
 	parse(argc, argv, &info);
-	// print_parse_result(&info);
-	//parsing end
+	// print_parse_result(&info);	
 	
-	// set scene
-	set_scene(&info);
-	// mlx_hook(info.win, 17, 0, ft_close, &info);
-	// mlx_loop(info.mlx);
+	set_image(&info);
+	mlx_hook(info.win, 2, 0, key_hook, &info);
+	mlx_hook(info.win, 17, 0, exit_window, &info);
+	mlx_loop(info.mlx);
+	return (0);
 }

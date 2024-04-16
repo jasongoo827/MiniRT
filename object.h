@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jgoo <jgoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 14:54:50 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/16 19:09:57 by yakim            ###   ########.fr       */
+/*   Updated: 2024/04/16 20:40:32 by jgoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,15 @@ typedef struct s_hit
 	t_vector	color;
 }	t_hit;
 
+typedef struct s_image
+{
+	void	*img_ptr;
+	char	*addr;
+	int		bits_per_pixel;
+	int		size_line;
+	int		endian;
+}	t_image;
+
 typedef struct s_info
 {
 	void		*mlx;
@@ -104,6 +113,7 @@ typedef struct s_info
 	t_light		light;
 	t_darray	*objarr;
 	t_hit		record;
+	t_image		img;
 }	t_info;
 
 t_obj	*init_obj(t_type type);

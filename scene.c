@@ -15,6 +15,7 @@ void	write_color(t_info *info, t_vector vector, int y, int x)
 
 	dst = info->img.addr + y * info->img.size_line + x * (info->img.bits_per_pixel / 8);
 	*(int *)dst = create_argb(0, (int)(255.999 * vector.d[X]), (int)(255.999 * vector.d[Y]), (int)(255.999 * vector.d[Z]));
+
 }
 
 t_vector	ray_color(t_info *info, t_ray ray)
@@ -28,6 +29,7 @@ t_vector	ray_color(t_info *info, t_ray ray)
 	{
 		info->record = record;
 		// check texture
+		texture(info); 
 		// checkerboard(info);
 		return (phong_lightning(info));
 	}

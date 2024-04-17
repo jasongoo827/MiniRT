@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jgoo <jgoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:36:40 by yakim             #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/04/17 18:46:40 by yakim            ###   ########.fr       */
+=======
+/*   Updated: 2024/04/17 19:39:37 by jgoo             ###   ########.fr       */
+>>>>>>> 9cd9ca72ba0471bef3b0f5f4eab852a5b47e0acc
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +67,11 @@ int	main(int argc, char **argv)
 	ft_bzero(&info, sizeof(t_info));
 	info.mlx = mlx_init();
 	win_init(info.mlx, &info.win);
-
+	info.tex.tex_ptr = mlx_xpm_file_to_image(info.mlx, "earthmap1k.xpm", &info.tex.width, &info.tex.height);
+	printf("width: %d height: %d\n", info.tex.width, info.tex.height);
+	info.tex.addr = (int *)mlx_get_data_addr(info.tex.tex_ptr, &info.tex.bits_per_pixel, &info.tex.size_line, &info.tex.endian);
 	parse(argc, argv, &info);
-	// print_parse_result(&info);	
-	
+	// // print_parse_result(&info);	
 	set_image(&info);
 	mlx_hook(info.win, 2, 0, key_hook, &info);
 	mlx_hook(info.win, 17, 0, exit_window, &info);

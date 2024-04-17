@@ -6,7 +6,7 @@
 /*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:36:40 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/17 11:34:27 by yakim            ###   ########.fr       */
+/*   Updated: 2024/04/17 18:46:40 by yakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,6 @@ int	win_init(void *mlx, void **win)
 	*win = mlx_new_window(mlx, 1920, 1080, "minirt");
 	mlx_clear_window(mlx, *win);
 	return (0);
-}
-
-int	ft_close(t_info *info)
-{
-	(void)info;
-	exit(0);
 }
 
 void	l(void)

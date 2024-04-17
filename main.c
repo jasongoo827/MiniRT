@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgoo <jgoo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:36:40 by yakim             #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/04/17 18:46:40 by yakim            ###   ########.fr       */
-=======
-/*   Updated: 2024/04/17 19:39:37 by jgoo             ###   ########.fr       */
->>>>>>> 9cd9ca72ba0471bef3b0f5f4eab852a5b47e0acc
+/*   Updated: 2024/04/17 20:54:58 by yakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +66,7 @@ int	main(int argc, char **argv)
 	info.tex.tex_ptr = mlx_xpm_file_to_image(info.mlx, "earthmap1k.xpm", &info.tex.width, &info.tex.height);
 	printf("width: %d height: %d\n", info.tex.width, info.tex.height);
 	info.tex.addr = (int *)mlx_get_data_addr(info.tex.tex_ptr, &info.tex.bits_per_pixel, &info.tex.size_line, &info.tex.endian);
+	printf("%d, %d, %d\n", info.tex.bits_per_pixel, info.tex.size_line, info.tex.endian);
 	parse(argc, argv, &info);
 	// // print_parse_result(&info);	
 	set_image(&info);

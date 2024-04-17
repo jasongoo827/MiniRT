@@ -34,26 +34,29 @@ void	checkerboard(t_info *info)
 
 void	texture(t_info *info)
 {
-	double	theta = atan2(info->record.point.d[X], info->record.point.d[Z]);
-	double	radius = sqrt(pow(info->record.point.d[X], 2) + pow(info->record.point.d[Y], 2) \
-	+ pow(info->record.point.d[Z], 2));
-	double	phi = acos(info->record.point.d[Y] / radius);
-	// printf("theta: %lf phi: %lf\n", theta, phi);
-	double	raw_u = theta / (2.0 * M_PI);
-	double	u = 0.5 - raw_u;
-	double	v = 1 - phi / M_PI;
-	// printf("u: %lf, v: %lf\n", u, v);
-	int	u2 = u * (info->tex.width - 1);
-	int	v2 = (1 - v) * (info->tex.height - 1);
-	// printf("u: %d, v: %d\n", u2, v2);
-	printf("idx: %d\n", u2 + info->tex.width * v2);
-	int color = info->tex.addr[u2 + info->tex.width * v2];
-	int x = ((color & 0XFF0000) >> 16);
-	int y = ((color & 0X00FF00) >> 8);
-	int z = (color & 0X0000FF);
-	info->record.color.d[X] =  (double)x / 255.999;
-	info->record.color.d[Y] = (double)y / 255.999;
-	info->record.color.d[Z] = (double)z / 255.999;
+	if (info->record.ishit)
+	{
+		double	theta = atan2(info->record.point.d[X], info->record.point.d[Z]);
+		double	radius = sqrt(pow(info->record.point.d[X], 2) + pow(info->record.point.d[Y], 2) \
+		+ pow(info->record.point.d[Z], 2));
+		double	phi = acos(info->record.point.d[Y] / radius);
+		// printf("theta: %lf phi: %lf\n", theta, phi);
+		double	raw_u = theta / (2.0 * M_PI);
+		double	u = 0.5 - raw_u;
+		double	v = 1 - phi / M_PI;
+		// printf("u: %lf, v: %lf\n", u, v);
+		int	u2 = (1 - u) * (info->tex.width - 1);
+		int	v2 = (1 - v) * (info->tex.height - 1);
+		// printf("u: %d, v: %d\n", u2, v2);
+		// printf("idx: %f, %f, %f, %d, %d\n",info->record.point.d[X], info->record.point.d[Y], info->record.point.d[Z], u2, v2);
+		int color = info->tex.addr[info->tex.size_line / 4 * v2 + u2];
+		int x = ((color & 0XFF0000) >> 16);
+		int y = ((color & 0X00FF00) >> 8);
+		int z = (color & 0X0000FF);
+		info->record.color.d[X] =  (double)x / 255.999;
+		info->record.color.d[Y] = (double)y / 255.999;
+		info->record.color.d[Z] = (double)z / 255.999;
+	}
 }
 
 t_canvas	set_canvas(void)

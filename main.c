@@ -6,7 +6,7 @@
 /*   By: jgoo <jgoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:36:40 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/17 19:39:37 by jgoo             ###   ########.fr       */
+/*   Updated: 2024/04/17 20:51:23 by jgoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,14 @@ int	main(int argc, char **argv)
 	info.tex.tex_ptr = mlx_xpm_file_to_image(info.mlx, "earthmap1k.xpm", &info.tex.width, &info.tex.height);
 	printf("width: %d height: %d\n", info.tex.width, info.tex.height);
 	info.tex.addr = (int *)mlx_get_data_addr(info.tex.tex_ptr, &info.tex.bits_per_pixel, &info.tex.size_line, &info.tex.endian);
+	for (int i = 0; i < 1000 * 500; ++i)
+	{
+		int color = info.tex.addr[i];
+		int x = ((color & 0XFF0000) >> 16);
+		int y = ((color & 0X00FF00) >> 8);
+		int z = (color & 0X0000FF);
+		printf("x: %x y: %x z: %x\n", x, y, z);
+	}
 	parse(argc, argv, &info);
 	// // print_parse_result(&info);	
 	set_image(&info);

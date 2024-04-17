@@ -46,7 +46,7 @@ void	texture(t_info *info)
 	int	u2 = u * (info->tex.width - 1);
 	int	v2 = (1 - v) * (info->tex.height - 1);
 	// printf("u: %d, v: %d\n", u2, v2);
-	printf("idx: %d\n", u2 + info->tex.width * v2);
+	// printf("idx: %d\n", u2 + info->tex.width * v2);
 	int color = info->tex.addr[u2 + info->tex.width * v2];
 	int x = ((color & 0XFF0000) >> 16);
 	int y = ((color & 0X00FF00) >> 8);

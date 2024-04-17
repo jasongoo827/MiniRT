@@ -6,7 +6,7 @@
 /*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 19:12:19 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/16 19:08:31 by yakim            ###   ########.fr       */
+/*   Updated: 2024/04/17 15:54:42 by yakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,8 @@ void	parse_object(char *line, t_info *info)
 		parse_plane(arr, info);
 	else if (ft_strcmp(arr[0], "cy") == 0)
 		parse_cylinder(arr, info);
+	else if (ft_strcmp(arr[0], "co") == 0)
+		parse_cone(arr, info);
 	else
 		cus_error("Error\nUnknown Identifier\n");
 	free_split(arr);
@@ -111,10 +113,10 @@ void	print_parse_result(t_info *info)
 	printf("origin: %f, %f, %f\n", info->camera.origin.d[0], info->camera.origin.d[1], info->camera.origin.d[2]);
 	printf("dir: %f, %f, %f\n", info->camera.dir.d[0], info->camera.dir.d[1], info->camera.dir.d[2]);
 	printf("fov: %f\n\n", info->camera.fov);
-	printf("light:\n");
-	printf("origin: %f, %f, %f\n", info->light.origin.d[0], info->light.origin.d[1], info->light.origin.d[2]);
-	printf("color: %f, %f, %f\n", info->light.color.d[0], info->light.color.d[1], info->light.color.d[2]);
-	printf("ratio: %f\n\n", info->light.ratio);
+	// printf("light:\n");
+	// printf("origin: %f, %f, %f\n", info->light.origin.d[0], info->light.origin.d[1], info->light.origin.d[2]);
+	// printf("color: %f, %f, %f\n", info->light.color.d[0], info->light.color.d[1], info->light.color.d[2]);
+	// printf("ratio: %f\n\n", info->light.ratio);
 	printf("ambient:\n");
 	printf("ratio: %f\n", info->ambient.ratio);
 	printf("color: %f, %f, %f\n\n", info->ambient.color.d[0], info->ambient.color.d[1], info->ambient.color.d[2]);
@@ -149,11 +151,9 @@ void	print_parse_result(t_info *info)
 	}
 }
 
-void	parse(int argc, char **argv, t_info *info)
+void	parse_name_check(int argc, char **argv)
 {
 	int		len_name;
-	int		fd;
-	char	*line;
 
 	if (argc != 2)
 		cus_error("Error\nToo many arguments\n");
@@ -163,26 +163,43 @@ void	parse(int argc, char **argv, t_info *info)
 	if (argv[1][len_name - 3] != '.' || argv[1][len_name - 2] != 'r' || \
 		argv[1][len_name - 1] != 't')
 		cus_error("Error\nMap name error\n");
+}
+
+char	*remove_nl(char *line)
+{
+	char *nl;
+	char *ret;
+
+	nl = ft_strchr(line, '\n');
+	if (nl)
+	{
+		ret = malloc(ft_strlen(line));
+		ft_strlcpy(ret, line, ft_strlen(line));
+		free(line);
+		return (ret);
+	}
+	else
+		return (line);
+}
+
+void	parse(int argc, char **argv, t_info *info)
+{
+	int		fd;
+	char	*line;
+
+	parse_name_check(argc, argv);
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
 		cus_error("Error\nOpen error\n");
 	info->objarr = init_array(0);
+	info->lightarr = init_array(0);
 	line = get_next_line(fd);
 	while (line)
 	{
-		char *nl = ft_strchr(line, '\n');
-		char *newline;
-		if (nl)
-		{
-			newline = malloc(ft_strlen(line));
-			ft_strlcpy(newline, line, ft_strlen(line));
-			free(line);
-		}
-		else
-			newline = line;
+		line = remove_nl(line);
 		// printf("%s\n", newline);
-		parse_object(newline, info);
-		free(newline);
+		parse_object(line, info);
+		free(line);
 		line = get_next_line(fd);
 	}
 }

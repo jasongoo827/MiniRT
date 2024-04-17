@@ -18,23 +18,6 @@ void	write_color(t_info *info, t_vector vector, int y, int x)
 
 }
 
-int	hit_sphere(t_ray ray, t_sphere sphere)
-{
-	t_vector	oc;
-	double		a;
-	double		b;
-	double		c;
-	double		discriminant;
-
-	oc = vec_minus(ray.origin, sphere.center);
-	a = dot(&ray.dir, &ray.dir);
-	b = 2.0 * dot(&oc, &ray.dir);
-	c = dot(&oc, &oc) - pow(sphere.radius, 2);
-	discriminant = b * b - 4 * a * c;
-
-	return (discriminant > 0);
-}
-
 t_vector	ray_color(t_info *info, t_ray ray)
 {
 	double	t;

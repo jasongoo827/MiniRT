@@ -6,7 +6,7 @@
 /*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 12:52:57 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/15 20:19:13 by yakim            ###   ########.fr       */
+/*   Updated: 2024/04/17 15:54:16 by yakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,21 +50,26 @@ void	parse_camera(char **arr, t_info *info)
 
 void	parse_light(char **arr, t_info *info)
 {
+	t_obj	*obj;
+	t_light	*light;
 	char	**temp;
 
+	obj = init_obj(LIGHT);
+	light = (t_light *)obj->ptr;
 	if (arr[1] == NULL || arr[2] == NULL || arr[3] == NULL)
 		cus_error("Error\nNot enough arguments\n");
 	temp = ft_split(arr[1], ',');
-	info->light.origin = parse_vector(temp, 0, 1, 0);
+	light->origin = parse_vector(temp, 0, 1, 0);
 	free_split(temp);
-	info->light.ratio = ft_strtod(arr[2]);
-	if (info->light.ratio < 0 || info->light.ratio > 1)
+	light->ratio = ft_strtod(arr[2]);
+	if (light->ratio < 0 || light->ratio > 1)
 		cus_error("Error\nLight ratio out of range\n");
 	temp = ft_split(arr[3], ',');
-	info->light.color = parse_vector(temp, 0, 0, 1);
+	light->color = parse_vector(temp, 0, 0, 1);
 	free_split(temp);
 	if (arr[4] != NULL)
 		cus_error("Error\nToo much arguments\n");
+	push_back(info->lightarr, obj);
 }
 
 void	parse_sphere(char **arr, t_info *info)
@@ -135,6 +140,31 @@ void	parse_cylinder(char **arr, t_info *info)
 	cylinder->color = parse_vector(temp, 0, 0, 1);
 	free_split(temp);
 	if (arr[6] != NULL)
+		cus_error("Error\nToo much arguments\n");
+	push_back(info->objarr, obj);
+}
+
+void	parse_cone(char **arr, t_info *info)
+{
+	t_obj	*obj;
+	t_cone	*cone;
+	char	**temp;
+
+	obj = init_obj(CONE);
+	cone = (t_cone *)obj->ptr;
+	if (arr[1] == NULL || arr[2] == NULL || arr[3] == NULL || arr[4] == NULL)
+		cus_error("Error\nNot enough arguments\n");
+	temp = ft_split(arr[1], ',');
+	cone->center = parse_vector(temp, 0, 1, 0);
+	free_split(temp);
+	temp = ft_split(arr[2], ',');
+	cone->normal = parse_vector(temp, 1, 0, 0);
+	free_split(temp);
+	cone->height = ft_strtod(arr[3]);
+	temp = ft_split(arr[4], ',');
+	cone->color = parse_vector(temp, 0, 0, 1);
+	free_split(temp);
+	if (arr[5] != NULL)
 		cus_error("Error\nToo much arguments\n");
 	push_back(info->objarr, obj);
 }

@@ -6,7 +6,7 @@
 /*   By: jgoo <jgoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:36:40 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/17 19:02:25 by jgoo             ###   ########.fr       */
+/*   Updated: 2024/04/17 19:39:37 by jgoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int	main(int argc, char **argv)
 	t_info	info;
 
 	// atexit(l);
+	ft_bzero(&info, sizeof(t_info));
 	info.mlx = mlx_init();
 	win_init(info.mlx, &info.win);
 	info.tex.tex_ptr = mlx_xpm_file_to_image(info.mlx, "earthmap1k.xpm", &info.tex.width, &info.tex.height);

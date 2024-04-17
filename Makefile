@@ -3,7 +3,7 @@
 CC = cc
 RM = rm -f
 
-CFLAGS = -Wall -Wextra -Werror -g -Imlx
+CFLAGS = -Wall -Wextra -Werror -MMD -MP -g -Imlx
 MLXFLAGS = -lmlx -Lmlx -framework OpenGL -framework AppKit
 
 NAME = miniRT
@@ -14,6 +14,7 @@ SRCS = main.c \
 		object.c \
 		hit_obj.c \
 		hit_obj_cy.c \
+		hit_obj_co.c \
 		darray.c \
 		error.c \
 		math_vector.c \
@@ -31,6 +32,7 @@ LIBFT_DIR = ./Libft/libft
 LIBFT_LIB = libft.a
 GNL_DIR = ./Libft/gnl
 GNL_LIB = libftgnl.a
+-include $(DEPS)
 
 all : $(NAME)
 

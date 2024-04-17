@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgoo <jgoo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 14:54:50 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/16 20:40:32 by jgoo             ###   ########.fr       */
+/*   Updated: 2024/04/17 15:26:30 by yakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ typedef enum e_type
 	LIGHT,
 	SPHERE,
 	PLANE,
-	CYLINDER
+	CYLINDER,
+	CONE
 }	t_type;
 
 typedef struct s_vector t_vector;
@@ -86,6 +87,14 @@ typedef struct s_cylinder
 	t_vector	color;
 }	t_cylinder;
 
+typedef struct s_cone
+{
+	t_vector	center;
+	t_vector	normal;
+	double		height;
+	t_vector	color;
+}	t_cone;
+
 typedef struct s_hit
 {
 	int			ishit;
@@ -110,10 +119,13 @@ typedef struct s_info
 	void		*win;
 	t_ambient	ambient;
 	t_camera	camera;
-	t_light		light;
+	t_darray	*lightarr;
 	t_darray	*objarr;
 	t_hit		record;
 	t_image		img;
+	int			count_light;
+	int			count_camera;
+	int			count_ambient;
 }	t_info;
 
 t_obj	*init_obj(t_type type);
@@ -122,5 +134,6 @@ t_hit	hit_obj(t_info *info, t_ray ray, t_hit record);
 void	hit_obj_sphere(t_ray ray, t_hit *record, t_sphere *sphere);
 void	hit_obj_plane(t_ray ray, t_hit *record, t_plane *plane);
 void	hit_obj_cylinder(t_ray ray, t_hit *record, t_cylinder *cylinder);
+void	hit_obj_cone(t_ray ray, t_hit *rec, t_cone *co);
 
 #endif

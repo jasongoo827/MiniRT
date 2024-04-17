@@ -6,7 +6,7 @@
 /*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 13:38:28 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/16 19:11:40 by yakim            ###   ########.fr       */
+/*   Updated: 2024/04/17 15:24:59 by yakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,8 @@ t_hit	hit_obj(t_info *info, t_ray ray, t_hit rec)
 			hit_obj_plane(ray, &rec, ((t_obj *)(info->objarr->arr[i]))->ptr);
 		else if (((t_obj *)(info->objarr->arr[i]))->type == CYLINDER)
 			hit_obj_cylinder(ray, &rec, ((t_obj *)(info->objarr->arr[i]))->ptr);
+		else if (((t_obj *)(info->objarr->arr[i]))->type == CONE)
+			hit_obj_cone(ray, &rec, ((t_obj *)(info->objarr->arr[i]))->ptr);
 		i++;
 	}
 	return (rec);

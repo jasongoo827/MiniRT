@@ -6,7 +6,7 @@
 /*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 19:12:19 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/17 15:54:42 by yakim            ###   ########.fr       */
+/*   Updated: 2024/04/17 18:42:14 by yakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	parse_object(char *line, t_info *info)
 		parse_plane(arr, info);
 	else if (ft_strcmp(arr[0], "cy") == 0)
 		parse_cylinder(arr, info);
-	else if (ft_strcmp(arr[0], "co") == 0)
+	else if (BONUS && ft_strcmp(arr[0], "co") == 0)
 		parse_cone(arr, info);
 	else
 		cus_error("Error\nUnknown Identifier\n");

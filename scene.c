@@ -29,7 +29,7 @@ t_vector	ray_color(t_info *info, t_ray ray)
 	{
 		info->record = record;
 		// check texture
-		texture(info); 
+		texture(info);
 		// checkerboard(info);
 		return (phong_lightning(info));
 	}

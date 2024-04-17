@@ -6,7 +6,7 @@
 /*   By: jgoo <jgoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 14:54:50 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/16 20:40:32 by jgoo             ###   ########.fr       */
+/*   Updated: 2024/04/17 16:41:56 by jgoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,10 +104,22 @@ typedef struct s_image
 	int		endian;
 }	t_image;
 
+typedef struct s_texture
+{
+	void	*tex_ptr;
+	int		*addr;
+	int		width;
+	int		height;
+	int		bits_per_pixel;
+	int		size_line;
+	int		endian;
+}	t_texture;
+
 typedef struct s_info
 {
 	void		*mlx;
 	void		*win;
+	t_texture	tex;
 	t_ambient	ambient;
 	t_camera	camera;
 	t_light		light;

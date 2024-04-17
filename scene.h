@@ -6,7 +6,7 @@
 /*   By: jgoo <jgoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 11:34:51 by jgoo              #+#    #+#             */
-/*   Updated: 2024/04/16 20:15:00 by jgoo             ###   ########.fr       */
+/*   Updated: 2024/04/17 16:15:28 by jgoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ t_canvas	set_canvas(void);
 t_viewport	set_viewport(t_camera camera, t_canvas canvas);
 t_ray		set_ray(t_camera camera, double u, double v, t_viewport viewport);
 void		checkerboard(t_info *info);
+void		texture(t_info *info);
 
 // scene.c
 t_vector	ray_color(t_info *info, t_ray ray);

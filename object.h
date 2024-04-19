@@ -6,7 +6,7 @@
 /*   By: jgoo <jgoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 14:54:50 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/17 19:39:50 by jgoo             ###   ########.fr       */
+/*   Updated: 2024/04/18 17:38:33 by jgoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ typedef struct s_info
 	void		*mlx;
 	void		*win;
 	t_texture	tex;
+	t_texture	bump;
 	t_ambient	ambient;
 	t_camera	camera;
 	t_darray	*lightarr;

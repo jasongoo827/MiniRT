@@ -6,83 +6,20 @@
 /*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 19:12:19 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/17 18:42:14 by yakim            ###   ########.fr       */
+/*   Updated: 2024/04/19 11:57:00 by yakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "essential.h"
 #include "object.h"
 #include "parse.h"
-
-int	ft_isspace(char c)
-{
-	if (c >= 9 && c <= 13)
-		return (1);
-	else if (c == 32)
-		return (1);
-	return (0);
-}
-
-double	ft_strtod(const char *str)
-{
-	double	d;
-	char	sign;
-	double	n;
-
-	d = 0.0;
-	sign = 0;
-	if (str == NULL)
-		cus_error("Error\nInput error\n");
-	while (ft_isspace(*str))
-		str++;
-	if (*str == '-' | *str == '+')
-	{
-		if (*str == '-')
-			sign = 1;
-		str++;
-	}
-	while (*str && *str != '.')
-	{
-		if (ft_isdigit(*str) == 0 && *str != '.')
-			cus_error("Error\nInput error\n");
-		d = (d * 10) + (double)(*str - '0');
-		str++;
-	}
-	if (*str == '.')
-		str++;
-	n = 0.1;
-	while (*str)
-	{
-		if (ft_isdigit(*str) == 0)
-			cus_error("Error\nInput error\n");
-		d += (*str - '0') * n;
-		n /= 10;
-		str++;
-	}
-	if (sign)
-		return (d * -1);
-	return (d);
-}
-
-int	ft_strcmp(const char *s1, const char *s2)
-{
-	while (*s1 && *s2)
-	{
-		if (*s1 == '\0' || *s2 == '\0')
-			break ;
-		if (*s1 != *s2)
-			return (*s1 - *s2);
-		s1++;
-		s2++;
-	}
-	return (*s1 - *s2);
-}
+#include "utils.h"
 
 void	parse_object(char *line, t_info *info)
 {
 	char	**arr;
 
-	arr = ft_split(line, ' ');
+	arr = ft_split_rt(line);
 	if (arr == NULL || arr[0] == NULL || arr[0][0] == 0)
 	{
 		free_split(arr);
@@ -163,23 +100,6 @@ void	parse_name_check(int argc, char **argv)
 	if (argv[1][len_name - 3] != '.' || argv[1][len_name - 2] != 'r' || \
 		argv[1][len_name - 1] != 't')
 		cus_error("Error\nMap name error\n");
-}
-
-char	*remove_nl(char *line)
-{
-	char *nl;
-	char *ret;
-
-	nl = ft_strchr(line, '\n');
-	if (nl)
-	{
-		ret = malloc(ft_strlen(line));
-		ft_strlcpy(ret, line, ft_strlen(line));
-		free(line);
-		return (ret);
-	}
-	else
-		return (line);
 }
 
 void	parse(int argc, char **argv, t_info *info)

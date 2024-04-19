@@ -22,7 +22,9 @@ SRCS = main.c \
 		matrix.c \
 		scene.c \
 		phong.c \
-		settings.c
+		settings.c \
+		utils.c \
+		utils2.c
 		
 OBJS = $(SRCS:.c=.o)
 DEPS = $(SRCS:.c=.d)

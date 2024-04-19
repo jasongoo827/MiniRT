@@ -6,7 +6,7 @@
 /*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 13:22:14 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/17 15:55:06 by yakim            ###   ########.fr       */
+/*   Updated: 2024/04/19 11:48:56 by yakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,6 @@ void		parse_sphere(char ** arr, t_info *info);
 void		parse_plane(char ** arr, t_info *info);
 void		parse_cylinder(char ** arr, t_info *info);
 void		parse_cone(char **arr, t_info *info);
-int			ft_isspace(char c);
-double		ft_strtod(const char *str);
-void		free_split(char **arr);
 void		print_parse_result(t_info *info);//
 
 #endif

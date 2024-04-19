@@ -6,12 +6,13 @@
 /*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 12:52:57 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/17 15:54:16 by yakim            ###   ########.fr       */
+/*   Updated: 2024/04/19 11:53:32 by yakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "essential.h"
 #include "parse.h"
+#include "utils.h"
 
 void	parse_ambient(char **arr, t_info *info)
 {

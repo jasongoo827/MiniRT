@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matrix.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jgoo <jgoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 14:22:31 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/16 15:57:21 by yakim            ###   ########.fr       */
+/*   Updated: 2024/04/22 19:46:49 by jgoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,12 @@ t_matrix	*alloc_matrix(void);
 t_matrix	*init_look_at_matrix(t_vector *eye_position, t_vector *r0, \
 t_vector *r1, t_vector *r2);
 void		get_axis(t_camera *camera);
+void		mul_matrix(double a[][3], double b[][3], double result[][3]);
+void		mul_matrix_by_constant(double matrix[3][3], double constant);
+double 		(*add_matrix(double matrix1[][3], double matrix2[][3]))[3];
+t_vector 	convert(t_vector point, double mat[][3]);
+void		init_k(double k[3][3], t_vector new_axis);
+void		init_i(double i[3][3]);
 
 // math_vector.c
 t_vector	*alloc_vector(double x, double y, double z, double w);

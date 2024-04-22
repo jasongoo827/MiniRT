@@ -9,9 +9,6 @@ int	create_argb(int a, int r, int g, int b)
 void	write_color(t_info *info, t_vector vector, int y, int x)
 {
 	char	*dst;
-	// printf("%lf %lf %lf\n", vector.d[X], vector.d[Y], vector.d[Z]);
-	// printf("%d %d %d\n", (int)(255.999 * vector.d[X]), \
-	// (int)(255.999 * vector.d[Y]), (int)(255.999 * vector.d[Z]));
 
 	dst = info->img.addr + y * info->img.size_line + x * (info->img.bits_per_pixel / 8);
 	*(int *)dst = create_argb(0, (int)(255.999 * vector.d[X]), (int)(255.999 * vector.d[Y]), (int)(255.999 * vector.d[Z]));
@@ -22,15 +19,17 @@ t_vector	ray_color(t_info *info, t_ray ray)
 {
 	double	t;
 	t_hit	record;
+	t_uv	uv;
 
 	init_record(&record);
 	record = hit_obj(info, ray, record);
 	if (record.ishit)
 	{
+		uv.init = 0;
 		info->record = record;
-		// check texture
-		texture(info);
 		// checkerboard(info);
+		texture(info, &uv);
+		bump(info, &uv);
 		return (phong_lightning(info));
 	}
 	else
@@ -49,7 +48,6 @@ void	render(t_info *info, t_canvas canvas, t_viewport viewport)
 	t_ray	ray;
 
 	j = canvas.height;
-	// printf("P3\n%d %d\n255\n", canvas.width, canvas.height);
 	while (--j >= 0)
 	{
 		i = -1;

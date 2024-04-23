@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapping.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jgoo <jgoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 18:48:41 by jgoo              #+#    #+#             */
-/*   Updated: 2024/04/23 15:27:29 by yakim            ###   ########.fr       */
+/*   Updated: 2024/04/23 18:49:42 by jgoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,12 @@ void	sphere_map(t_info *info, double *u, double *v)
 	double	radius;
 	double	phi;
 	double	raw_u;
+	t_sphere	*sp;
 
-	theta = atan2(info->record.point.d[X], info->record.point.d[Z]);
-	radius = sqrt(pow(info->record.point.d[X], 2) + pow(info->record.point.d[Y], 2) \
-	+ pow(info->record.point.d[Z], 2));
-	phi = acos(info->record.point.d[Y] / radius);
+	sp = (t_sphere *)info->record.obj->ptr;
+	theta = atan2(info->record.point.d[X] - sp->center.d[X], info->record.point.d[Z] - sp->center.d[Z]);
+	radius = sp->radius;
+	phi = acos((info->record.point.d[Y] - sp->center.d[Y])/ radius);
 	raw_u = theta / (2.0 * M_PI);
 	*u = 0.5 - raw_u;
 	*v = 1 - phi / M_PI;
@@ -30,26 +31,54 @@ void	sphere_map(t_info *info, double *u, double *v)
 
 void	plane_map(t_info *info, double *u, double *v)
 {
+	t_plane	*pl;
+
+	pl = (t_plane *)info->record.obj->ptr;
 	// 법선벡터에 따라 가져오는 성분 다르게
-	*u = fmod(info->record.point.d[X] / 10, 1.0);
-	*v = fmod(info->record.point.d[Z] / 10, 1.0);
+	if (pl->normal.d[Y] != 0.0)
+	{
+		*u = fmod(info->record.point.d[X] / 25, 1.0);
+		*v = fmod(info->record.point.d[Z] / 25, 1.0);
+	}
+	else if (pl->normal.d[X] != 0.0)
+	{
+		*u = fmod(info->record.point.d[Y] / 25, 1.0);
+		*v = fmod(info->record.point.d[Z] / 25, 1.0);
+	}
+	else if (pl->normal.d[Z] != 0.0)
+	{
+		*u = fmod(info->record.point.d[X] / 25, 1.0);
+		*v = fmod(info->record.point.d[Y] / 25, 1.0);
+	}
 	*u = (*u + 1) / 2.0;
 	*v = (*v + 1) / 2.0;
-	// *u = info->record.point.d[X] / 10;
-	// *v = info->record.point.d[Z] / 10;
 }
 
 void	cylinder_map(t_info *info, double *u, double *v)
 {
-	double	theta;
-	double	raw_u;
+	double		theta;
+	double		raw_u;
+	t_cylinder	*cy;
 
-	// 축 방향에 따라 다르게 가져와야 함
-	theta = atan2(info->record.point.d[X], info->record.point.d[Z]);
+	cy = (t_cylinder *)info->record.obj->ptr;
+	theta = 0.0;
+	if (cy->normal.d[Y] != 0.0)
+	{
+		theta = atan2(info->record.point.d[X] - cy->center.d[X], info->record.point.d[Z] - cy->center.d[Z]);
+		*v = fmod((info->record.point.d[Y] - cy->center.d[Y]) / (cy->height * 2.0), 1.0);
+	}
+	else if (cy->normal.d[X] != 0.0)
+	{
+		theta = atan2(info->record.point.d[Y] - cy->center.d[Y], info->record.point.d[Z] - cy->center.d[Z]);
+		*v = fmod((info->record.point.d[X] - cy->center.d[X]) / (cy->height * 2.0), 1.0);
+	}
+	else if (cy->normal.d[Z] != 0.0)
+	{
+		theta = atan2(info->record.point.d[X] - cy->center.d[X], info->record.point.d[Y] - cy->center.d[Y]);
+		*v = fmod((info->record.point.d[Z] - cy->center.d[Z]) / (cy->height * 2.0), 1.0);
+	}
 	raw_u = theta / (2.0 * M_PI);
 	*u = 0.5 - raw_u;
-	// 높이에 비례하게 나눠야 함
-	*v = fmod(info->record.point.d[Y] / 20, 1.0);
 }
 
 double	get_height(t_info *info, int idx)

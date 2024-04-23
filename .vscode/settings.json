@@ -25,6 +25,7 @@
 		"unordered_map": "c",
 		"utility": "c",
 		"vector": "c",
-		"__locale": "c"
+		"__locale": "c",
+		"complex": "c"
 	}
 }

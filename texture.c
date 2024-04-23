@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jgoo <jgoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 13:05:07 by jgoo              #+#    #+#             */
-/*   Updated: 2024/04/23 15:28:23 by yakim            ###   ########.fr       */
+/*   Updated: 2024/04/23 16:36:08 by jgoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,17 @@ void	checkerboard(t_info *info)
 	double	v;
 	int		u2;
 	int		v2;
-	// if record type == sphere
-	// sphere_map(info, &u, &v);
-	// if record type == plane
-	// plane_map(info, &u, &v);
-	// if record type == cylinder
-	cylinder_map(info, &u, &v);
-	// multiply frequency
+
+	u = 0.0;
+	v = 0.0;
+	if (info->record.obj->type == SPHERE)
+		sphere_map(info, &u, &v);
+	else if (info->record.obj->type == PLANE)
+		plane_map(info, &u, &v);
+	else if (info->record.obj->type == CYLINDER)
+		cylinder_map(info, &u, &v);
+	else if (info->record.obj->type == CONE)
+		cylinder_map(info, &u, &v);
 	u2 = floor(u * 8);
 	v2 = floor(v * 8);
 	if ((u2 + v2) % 2 == 0)
@@ -107,10 +111,14 @@ void	texture(t_info *info, t_uv *uv)
 	int		v2;
 	int		color;
 	
-	if (!uv->init)
+	if (info->record.obj->type == SPHERE)
 		sphere_map(info, &uv->u, &uv->v);
-	// plane_map(info, &uv->u, &uv->v);
-	uv->init = 1;
+	else if (info->record.obj->type == PLANE)
+		plane_map(info, &uv->u, &uv->v);
+	else if (info->record.obj->type == CYLINDER)
+		cylinder_map(info, &uv->u, &uv->v);
+	else if (info->record.obj->type == CONE)
+		cylinder_map(info, &uv->u, &uv->v);
 	u2 = (1 - uv->u) * (info->record.obj->tex.width - 1);
 	v2 = (1 - uv->v) * (info->record.obj->tex.height - 1);
 	color = info->record.obj->tex.addr[info->record.obj->tex.size_line / 4 * v2 + u2];

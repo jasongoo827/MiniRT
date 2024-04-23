@@ -28,8 +28,8 @@ t_vector	ray_color(t_info *info, t_ray ray)
 		uv.init = 0;
 		info->record = record;
 		// checkerboard(info);
-		texture(info, &uv);
-		bump(info, &uv);
+		// texture(info, &uv);
+		// bump(info, &uv);
 		return (phong_lightning(info));
 	}
 	else

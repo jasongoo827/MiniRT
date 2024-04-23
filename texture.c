@@ -6,7 +6,7 @@
 /*   By: jgoo <jgoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 13:05:07 by jgoo              #+#    #+#             */
-/*   Updated: 2024/04/22 20:05:18 by jgoo             ###   ########.fr       */
+/*   Updated: 2024/04/23 12:43:39 by jgoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ void	checkerboard(t_info *info)
 	int		u2;
 	int		v2;
 	// if record type == sphere
-	sphere_map(info, &u, &v);
+	// sphere_map(info, &u, &v);
 	// if record type == plane
-	plane_map(info, &u, &v);
+	// plane_map(info, &u, &v);
 	// if record type == cylinder
 	cylinder_map(info, &u, &v);
 	// multiply frequency
-	u2 = floor(u);
-	v2 = floor(v);
+	u2 = floor(u * 8);
+	v2 = floor(v * 8);
 	if ((u2 + v2) % 2 == 0)
 		info->record.color = vec4(1, 1, 1, 0);
 	else
@@ -109,6 +109,7 @@ void	texture(t_info *info, t_uv *uv)
 	
 	if (!uv->init)
 		sphere_map(info, &uv->u, &uv->v);
+	// plane_map(info, &uv->u, &uv->v);
 	uv->init = 1;
 	u2 = (1 - uv->u) * (info->tex.width - 1);
 	v2 = (1 - uv->v) * (info->tex.height - 1);

@@ -6,7 +6,7 @@
 /*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 13:05:07 by jgoo              #+#    #+#             */
-/*   Updated: 2024/04/23 15:14:10 by yakim            ###   ########.fr       */
+/*   Updated: 2024/04/23 15:22:06 by yakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,15 @@ void	checkerboard(t_info *info)
 	double	v;
 	int		u2;
 	int		v2;
-	if (info->record.type == SPHERE)
-		sphere_map(info, &u, &v);
-	else if (info->record.type == PLANE)
-		plane_map(info, &u, &v);
-	else if (info->record.type == CYLINDER)
-		cylinder_map(info, &u, &v);
-	else
-		return ;
+	// if record type == sphere
+	// sphere_map(info, &u, &v);
+	// if record type == plane
+	// plane_map(info, &u, &v);
+	// if record type == cylinder
+	cylinder_map(info, &u, &v);
 	// multiply frequency
-	u2 = floor(u);
-	v2 = floor(v);
+	u2 = floor(u * 8);
+	v2 = floor(v * 8);
 	if ((u2 + v2) % 2 == 0)
 		info->record.color = vec4(1, 1, 1, 0);
 	else
@@ -111,6 +109,7 @@ void	texture(t_info *info, t_uv *uv)
 	
 	if (!uv->init)
 		sphere_map(info, &uv->u, &uv->v);
+	// plane_map(info, &uv->u, &uv->v);
 	uv->init = 1;
 	u2 = (1 - uv->u) * (info->tex.width - 1);
 	v2 = (1 - uv->v) * (info->tex.height - 1);

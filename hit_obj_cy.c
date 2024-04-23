@@ -6,7 +6,7 @@
 /*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 16:23:48 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/16 19:56:51 by yakim            ###   ########.fr       */
+/*   Updated: 2024/04/23 15:08:08 by yakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_vector	cy_get_normal(t_vector p, double height, t_cylinder *cy)
 	normalize_vector(&normal);
 	return (normal);
 }
-void	hit_obj_cylinder_sp(t_ray ray, t_hit *rec, t_cylinder *cy)
+void	hit_obj_cylinder_sp(t_ray ray, t_hit *rec, t_cylinder *cy, t_obj *obj)
 {
 	double		tempt;
 	double		divider;
@@ -56,6 +56,8 @@ void	hit_obj_cylinder_sp(t_ray ray, t_hit *rec, t_cylinder *cy)
 			if (dot(&rec->n, &ray.dir) > 0)
 				rec->n = vec_scala(rec->n, -1);
 			rec->color = cy->color;
+			rec->type = CYLINDER;
+			rec->obj = obj;
 		}
 	}
 	cap = vec_minus(cy->center, vec_scala(cy->normal, cy->height / 2));
@@ -73,11 +75,13 @@ void	hit_obj_cylinder_sp(t_ray ray, t_hit *rec, t_cylinder *cy)
 			if (dot(&rec->n, &ray.dir) > 0)
 				rec->n = vec_scala(rec->n, -1);
 			rec->color = cy->color;
+			rec->type = CYLINDER;
+			rec->obj = obj;
 		}
 	}
 }
 
-void	hit_obj_cylinder(t_ray ray, t_hit *rec, t_cylinder *cy)
+void	hit_obj_cylinder(t_ray ray, t_hit *rec, t_cylinder *cy, t_obj *obj)
 {
 	t_vector	oc;
 	double		a;
@@ -105,6 +109,8 @@ void	hit_obj_cylinder(t_ray ray, t_hit *rec, t_cylinder *cy)
 				if (dot(&rec->n, &ray.dir) > 0)
 					rec->n = vec_scala(rec->n, -1);
 				rec->color = cy->color;
+				rec->type = CYLINDER;
+				rec->obj = obj;
 			}
 		}
 		tempt = (-1 * b + sqrt(discriminant)) / a;
@@ -120,8 +126,10 @@ void	hit_obj_cylinder(t_ray ray, t_hit *rec, t_cylinder *cy)
 				if (dot(&rec->n, &ray.dir) > 0)
 					rec->n = vec_scala(rec->n, -1);
 				rec->color = cy->color;
+				rec->type = CYLINDER;
+				rec->obj = obj;
 			}
 		}
 	}
-	hit_obj_cylinder_sp(ray, rec, cy);
+	hit_obj_cylinder_sp(ray, rec, cy, obj);
 }

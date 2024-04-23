@@ -6,7 +6,7 @@
 /*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 19:12:19 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/19 11:57:00 by yakim            ###   ########.fr       */
+/*   Updated: 2024/04/23 15:11:39 by yakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,8 @@ void	parse_name_check(int argc, char **argv)
 		cus_error("Error\nMap name error\n");
 }
 
+
+
 void	parse(int argc, char **argv, t_info *info)
 {
 	int		fd;
@@ -122,4 +124,10 @@ void	parse(int argc, char **argv, t_info *info)
 		free(line);
 		line = get_next_line(fd);
 	}
+	if (info->count_ambient != 1 || info->count_camera != 1)
+		cus_error("Error\nMore or less object\n");
+	if (BONUS == 0 && info->count_light != 1 && info->count_light != 0)
+		cus_error("Error\nMore or less object\n");
+	if (BONUS && info->count_light < 0)
+		cus_error("Error\nMore or less object\n");
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgoo <jgoo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 13:05:07 by jgoo              #+#    #+#             */
-/*   Updated: 2024/04/22 20:05:18 by jgoo             ###   ########.fr       */
+/*   Updated: 2024/04/23 15:14:10 by yakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,14 @@ void	checkerboard(t_info *info)
 	double	v;
 	int		u2;
 	int		v2;
-	// if record type == sphere
-	sphere_map(info, &u, &v);
-	// if record type == plane
-	plane_map(info, &u, &v);
-	// if record type == cylinder
-	cylinder_map(info, &u, &v);
+	if (info->record.type == SPHERE)
+		sphere_map(info, &u, &v);
+	else if (info->record.type == PLANE)
+		plane_map(info, &u, &v);
+	else if (info->record.type == CYLINDER)
+		cylinder_map(info, &u, &v);
+	else
+		return ;
 	// multiply frequency
 	u2 = floor(u);
 	v2 = floor(v);

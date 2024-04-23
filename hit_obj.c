@@ -6,7 +6,7 @@
 /*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 13:38:28 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/17 15:24:59 by yakim            ###   ########.fr       */
+/*   Updated: 2024/04/23 15:07:59 by yakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	init_record(t_hit *rec)
 	rec->color.d[W] = 0;
 }
 
-void	hit_obj_sphere(t_ray ray, t_hit *rec, t_sphere *sp)
+void	hit_obj_sphere(t_ray ray, t_hit *rec, t_sphere *sp, t_obj *obj)
 {
 	t_vector	oc;
 	double		a;
@@ -51,6 +51,8 @@ void	hit_obj_sphere(t_ray ray, t_hit *rec, t_sphere *sp)
 				if (dot(&rec->n, &ray.dir) > 0)
 					rec->n = vec_scala(rec->n, -1);
 				rec->color = sp->color;
+				rec->type = SPHERE;
+				rec->obj = obj;
 			}
 		}
 		tempt = (-1 * b + sqrt(discriminant)) / a;
@@ -66,12 +68,14 @@ void	hit_obj_sphere(t_ray ray, t_hit *rec, t_sphere *sp)
 				if (dot(&rec->n, &ray.dir) > 0)
 					rec->n = vec_scala(rec->n, -1);
 				rec->color = sp->color;
+				rec->type = SPHERE;
+				rec->obj = obj;
 			}
 		}
 	}
 }
 
-void	hit_obj_plane(t_ray ray, t_hit *rec, t_plane *plane)
+void	hit_obj_plane(t_ray ray, t_hit *rec, t_plane *plane, t_obj *obj)
 {
 	double		tempt;
 	double		divider;
@@ -93,6 +97,8 @@ void	hit_obj_plane(t_ray ray, t_hit *rec, t_plane *plane)
 			if (dot(&rec->n, &ray.dir) > 0)
 				rec->n = vec_scala(rec->n, -1);
 			rec->color = plane->color;
+			rec->type = PLANE;
+			rec->obj = obj;
 		}
 	}
 }
@@ -106,13 +112,13 @@ t_hit	hit_obj(t_info *info, t_ray ray, t_hit rec)
 	while (i < info->objarr->size)
 	{
 		if (((t_obj *)(info->objarr->arr[i]))->type == SPHERE)
-			hit_obj_sphere(ray, &rec, ((t_obj *)(info->objarr->arr[i]))->ptr);
+			hit_obj_sphere(ray, &rec, ((t_obj *)(info->objarr->arr[i]))->ptr, info->objarr->arr[i]);
 		else if (((t_obj *)(info->objarr->arr[i]))->type == PLANE)
-			hit_obj_plane(ray, &rec, ((t_obj *)(info->objarr->arr[i]))->ptr);
+			hit_obj_plane(ray, &rec, ((t_obj *)(info->objarr->arr[i]))->ptr, info->objarr->arr[i]);
 		else if (((t_obj *)(info->objarr->arr[i]))->type == CYLINDER)
-			hit_obj_cylinder(ray, &rec, ((t_obj *)(info->objarr->arr[i]))->ptr);
+			hit_obj_cylinder(ray, &rec, ((t_obj *)(info->objarr->arr[i]))->ptr, info->objarr->arr[i]);
 		else if (((t_obj *)(info->objarr->arr[i]))->type == CONE)
-			hit_obj_cone(ray, &rec, ((t_obj *)(info->objarr->arr[i]))->ptr);
+			hit_obj_cone(ray, &rec, ((t_obj *)(info->objarr->arr[i]))->ptr, info->objarr->arr[i]);
 		i++;
 	}
 	return (rec);

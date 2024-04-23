@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgoo <jgoo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:36:40 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/22 19:33:21 by jgoo             ###   ########.fr       */
+/*   Updated: 2024/04/23 15:13:24 by yakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,10 @@ int	main(int argc, char **argv)
 	ft_bzero(&info, sizeof(t_info));
 	info.mlx = mlx_init();
 	win_init(info.mlx, &info.win);
-	info.tex.tex_ptr = mlx_xpm_file_to_image(info.mlx, "./xpm/venusmap.xpm", &info.tex.width, &info.tex.height);
-	info.tex.addr = (int *)mlx_get_data_addr(info.tex.tex_ptr, &info.tex.bits_per_pixel, &info.tex.size_line, &info.tex.endian);
-	info.bump.tex_ptr = mlx_xpm_file_to_image(info.mlx, "./xpm/venusbump.xpm", &info.bump.width, &info.bump.height);
-	info.bump.addr = (int *)mlx_get_data_addr(info.bump.tex_ptr, &info.bump.bits_per_pixel, &info.bump.size_line, &info.bump.endian);
+	// info.tex.tex_ptr = mlx_xpm_file_to_image(info.mlx, "./xpm/venusmap.xpm", &info.tex.width, &info.tex.height);
+	// info.tex.addr = (int *)mlx_get_data_addr(info.tex.tex_ptr, &info.tex.bits_per_pixel, &info.tex.size_line, &info.tex.endian);
+	// info.bump.tex_ptr = mlx_xpm_file_to_image(info.mlx, "./xpm/venusbump.xpm", &info.bump.width, &info.bump.height);
+	// info.bump.addr = (int *)mlx_get_data_addr(info.bump.tex_ptr, &info.bump.bits_per_pixel, &info.bump.size_line, &info.bump.endian);
 	parse(argc, argv, &info);
 	// // print_parse_result(&info);	
 	set_image(&info);

@@ -6,7 +6,7 @@
 /*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:25:11 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/17 16:08:28 by yakim            ###   ########.fr       */
+/*   Updated: 2024/04/23 15:08:56 by yakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_vector	co_get_normal(t_vector p, t_cone *co)
 	normalize_vector(&normal);
 	return (normal);
 }
-void	hit_obj_cone_sp(t_ray ray, t_hit *rec, t_cone *co)
+void	hit_obj_cone_sp(t_ray ray, t_hit *rec, t_cone *co, t_obj *obj)
 {
 	double		tempt;
 	double		divider;
@@ -56,11 +56,13 @@ void	hit_obj_cone_sp(t_ray ray, t_hit *rec, t_cone *co)
 			if (dot(&rec->n, &ray.dir) > 0)
 				rec->n = vec_scala(rec->n, -1);
 			rec->color = co->color;
+			rec->type = CONE;
+			rec->obj = obj;
 		}
 	}
 }
 
-void	hit_obj_cone(t_ray ray, t_hit *rec, t_cone *co)
+void	hit_obj_cone(t_ray ray, t_hit *rec, t_cone *co, t_obj *obj)
 {
 	t_vector	oc;
 	double		a;
@@ -88,6 +90,8 @@ void	hit_obj_cone(t_ray ray, t_hit *rec, t_cone *co)
 				if (dot(&rec->n, &ray.dir) > 0)
 					rec->n = vec_scala(rec->n, -1);
 				rec->color = co->color;
+				rec->type = CONE;
+				rec->obj = obj;
 			}
 		}
 		tempt = (-1 * b + sqrt(discriminant)) / a;
@@ -103,8 +107,10 @@ void	hit_obj_cone(t_ray ray, t_hit *rec, t_cone *co)
 				if (dot(&rec->n, &ray.dir) > 0)
 					rec->n = vec_scala(rec->n, -1);
 				rec->color = co->color;
+				rec->type = CONE;
+				rec->obj = obj;
 			}
 		}
 	}
-	hit_obj_cone_sp(ray, rec, co);
+	hit_obj_cone_sp(ray, rec, co, obj);
 }

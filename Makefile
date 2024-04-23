@@ -19,6 +19,7 @@ SRCS = main.c \
 		error.c \
 		math_vector.c \
 		math_vector2.c \
+		math_vector3.c \
 		matrix.c \
 		scene.c \
 		phong.c \

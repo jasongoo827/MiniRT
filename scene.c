@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   scene.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jgoo <jgoo@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/23 19:53:09 by jgoo              #+#    #+#             */
+/*   Updated: 2024/04/23 19:53:53 by jgoo             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "scene.h"
 #include "light.h"
 
@@ -10,9 +22,10 @@ void	write_color(t_info *info, t_vector vector, int y, int x)
 {
 	char	*dst;
 
-	dst = info->img.addr + y * info->img.size_line + x * (info->img.bits_per_pixel / 8);
-	*(int *)dst = create_argb(0, (int)(255.999 * vector.d[X]), (int)(255.999 * vector.d[Y]), (int)(255.999 * vector.d[Z]));
-
+	dst = info->img.addr + y * info->img.size_line + x * \
+	(info->img.bits_per_pixel / 8);
+	*(int *)dst = create_argb(0, (int)(255.999 * vector.d[X]), \
+	(int)(255.999 * vector.d[Y]), (int)(255.999 * vector.d[Z]));
 }
 
 t_vector	ray_color(t_info *info, t_ray ray)
@@ -37,8 +50,9 @@ t_vector	ray_color(t_info *info, t_ray ray)
 	}
 	else
 	{
-		t = 0.5 * (ray.dir.d[Y]  + 1.0);
-		return (vec_plus(vec_scala(vec4(1, 1, 1, 1), 1.0 - t), vec_scala(vec4(0.5, 0.7, 1.0, 1), t)));
+		t = 0.5 * (ray.dir.d[Y] + 1.0);
+		return (vec_plus(vec_scala(vec4(1, 1, 1, 1), 1.0 - t), \
+		vec_scala(vec4(0.5, 0.7, 1.0, 1), t)));
 	}
 }
 

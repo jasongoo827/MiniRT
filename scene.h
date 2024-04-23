@@ -6,7 +6,7 @@
 /*   By: jgoo <jgoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 11:34:51 by jgoo              #+#    #+#             */
-/*   Updated: 2024/04/22 18:56:14 by jgoo             ###   ########.fr       */
+/*   Updated: 2024/04/23 19:57:04 by jgoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_uv
 }	t_uv;
 
 // settings.c
+void		get_axis(t_camera *camera);
 t_canvas	set_canvas(void);
 t_viewport	set_viewport(t_camera camera, t_canvas canvas);
 t_ray		set_ray(t_camera camera, double u, double v, t_viewport viewport);
@@ -62,5 +63,6 @@ void		sphere_map(t_info *info, double *u, double *v);
 void		plane_map(t_info *info, double *u, double *v);
 void		cylinder_map(t_info *info, double *u, double *v);
 double		get_height(t_info *info, int idx);
+void		cal_normal(t_info *info, t_vector new_axis, double theta);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 12:52:57 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/23 14:56:51 by yakim            ###   ########.fr       */
+/*   Updated: 2024/04/23 15:33:22 by yakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,17 +173,17 @@ void	parse_bonus(char *str, t_info *info, t_texture *tex, t_texture *bump)
 	if (temp[0])
 	{
 		tex->tex_ptr = mlx_xpm_file_to_image(info->mlx, temp[0], &tex->width, &tex->height);
+		if (tex->tex_ptr == 0)
+			cus_error("Error\nInvalid bonus argument input\n");
 		tex->addr = (int *)mlx_get_data_addr(tex->tex_ptr, &tex->bits_per_pixel, &tex->size_line, &tex->endian);
+		
 	}
 	if (temp[1])
 	{
 		bump->tex_ptr = mlx_xpm_file_to_image(info->mlx, temp[1], &bump->width, &bump->height);
+		if (bump->tex_ptr == 0)
+			cus_error("Error\nInvalid bonus argument input\n");
 		bump->addr = (int *)mlx_get_data_addr(bump->tex_ptr, &bump->bits_per_pixel, &bump->size_line, &bump->endian);
-	}
-	if (tex->tex_ptr == 0 || bump->tex_ptr == 0)
-	{
-		free_split(temp);
-		cus_error("Error\nInvalid bonus argument input\n");
 	}
 	free_split(temp);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgoo <jgoo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 14:54:50 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/18 17:38:33 by jgoo             ###   ########.fr       */
+/*   Updated: 2024/04/22 14:19:09 by yakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ typedef struct s_sphere
 	t_vector	center;
 	double		radius;
 	t_vector	color;
+	int			checker;
 }	t_sphere;
 
 typedef struct s_plane
@@ -76,6 +77,7 @@ typedef struct s_plane
 	t_vector	point;
 	t_vector	normal;
 	t_vector	color;
+	int			checker;
 }	t_plane;
 
 typedef struct s_cylinder
@@ -85,6 +87,7 @@ typedef struct s_cylinder
 	double		diameter;
 	double		height;
 	t_vector	color;
+	int			checker;
 }	t_cylinder;
 
 typedef struct s_cone

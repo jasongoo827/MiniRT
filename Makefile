@@ -24,7 +24,9 @@ SRCS = main.c \
 		phong.c \
 		settings.c \
 		utils.c \
-		utils2.c
+		utils2.c \
+		texture.c \
+		mapping.c
 		
 OBJS = $(SRCS:.c=.o)
 DEPS = $(SRCS:.c=.d)

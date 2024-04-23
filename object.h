@@ -6,7 +6,7 @@
 /*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 14:54:50 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/23 16:01:27 by yakim            ###   ########.fr       */
+/*   Updated: 2024/04/23 21:04:01 by yakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,16 @@ typedef enum e_type
 }	t_type;
 
 typedef struct s_vector t_vector;
+
+typedef struct s_dscrmnt
+{
+	double	a;
+	double	b;
+	double	c;
+	double	dscrmnt;
+	double	root;
+	double	height;
+}	t_dscrmnt;
 
 typedef struct s_image
 {
@@ -150,8 +160,13 @@ t_obj	*init_obj(t_type type);
 void	init_record(t_hit *record);
 t_hit	hit_obj(t_info *info, t_ray ray, t_hit record);
 void	hit_obj_sphere(t_ray ray, t_hit *record, t_sphere *sphere, t_obj *obj);
+int		dscrmnt_sp(t_dscrmnt *d, t_ray *ray, t_sphere *sp, t_vector *oc);
 void	hit_obj_plane(t_ray ray, t_hit *record, t_plane *plane, t_obj *obj);
 void	hit_obj_cylinder(t_ray ray, t_hit *record, t_cylinder *cylinder, t_obj *obj);
+int		dscrmnt_cy(t_dscrmnt *d, t_ray *ray, t_cylinder *cy, t_vector *oc);
 void	hit_obj_cone(t_ray ray, t_hit *rec, t_cone *co, t_obj *obj);
+int		dscrmnt_co(t_dscrmnt *d, t_ray *ray, t_cone *co, t_vector *oc);
+double	co_get_height(t_ray *ray, double t, t_cone *co);
+double	cy_get_height(t_ray *ray, double t, t_cylinder *cy);
 
 #endif

@@ -15,6 +15,7 @@ SRCS = main.c \
 		hit_obj.c \
 		hit_obj_cy.c \
 		hit_obj_co.c \
+		discriminant.c \
 		darray.c \
 		error.c \
 		math_vector.c \

@@ -6,18 +6,18 @@
 /*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 16:23:48 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/23 15:08:08 by yakim            ###   ########.fr       */
+/*   Updated: 2024/04/23 21:03:21 by yakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "essential.h"
 #include "object.h"
 
-double	cy_get_height(t_ray ray, double t, t_cylinder *cy)
+double	cy_get_height(t_ray *ray, double t, t_cylinder *cy)
 {
 	t_vector	point;
 
-	point = vec_plus(ray.origin, vec_scala(ray.dir, t));
+	point = vec_plus(ray->origin, vec_scala(ray->dir, t));
 	return (dot_(vec_minus(point, cy->center), cy->normal));
 }
 
@@ -31,12 +31,14 @@ t_vector	cy_get_normal(t_vector p, double height, t_cylinder *cy)
 	normalize_vector(&normal);
 	return (normal);
 }
-void	hit_obj_cylinder_sp(t_ray ray, t_hit *rec, t_cylinder *cy, t_obj *obj)
+
+void	hit_obj_cylinder_cap(t_ray ray, t_hit *rec, t_cylinder *cy, t_obj *obj)
 {
 	double		tempt;
 	double		divider;
 	t_vector	oc;
 	t_vector	cap;
+	t_vector	point;
 
 	divider = dot(&ray.dir, &cy->normal);
 	if (divider == 0)
@@ -46,7 +48,7 @@ void	hit_obj_cylinder_sp(t_ray ray, t_hit *rec, t_cylinder *cy, t_obj *obj)
 	tempt = dot(&oc, &cy->normal) / divider;
 	if (tempt >= 0)
 	{
-		t_vector point = vec_plus(ray.origin, vec_scala(ray.dir, tempt));
+		point = vec_plus(ray.origin, vec_scala(ray.dir, tempt));
 		if (vec_length2(vec_minus(point, cap)) <= pow(cy->diameter, 2) && (rec->ishit == 0 || (rec->ishit && tempt < rec->t)))
 		{
 			rec->ishit = 1;
@@ -65,7 +67,7 @@ void	hit_obj_cylinder_sp(t_ray ray, t_hit *rec, t_cylinder *cy, t_obj *obj)
 	tempt = dot(&oc, &cy->normal) / divider;
 	if (tempt >= 0)
 	{
-		t_vector point = vec_plus(ray.origin, vec_scala(ray.dir, tempt));
+		point = vec_plus(ray.origin, vec_scala(ray.dir, tempt));
 		if (vec_length2(vec_minus(point, cap)) <= pow(cy->diameter, 2) && (rec->ishit == 0 || (rec->ishit && tempt < rec->t)))
 		{
 			rec->ishit = 1;
@@ -84,52 +86,23 @@ void	hit_obj_cylinder_sp(t_ray ray, t_hit *rec, t_cylinder *cy, t_obj *obj)
 void	hit_obj_cylinder(t_ray ray, t_hit *rec, t_cylinder *cy, t_obj *obj)
 {
 	t_vector	oc;
-	double		a;
-	double		b;
-	double		c;
-	double		discriminant;
+	t_dscrmnt	d;
 
 	oc = vec_minus(ray.origin, cy->center);
-	a = vec_length2(cross_(&ray.dir, &cy->normal));
-	b = dot_(cross_(&ray.dir, &cy->normal), cross_(&oc, &cy->normal));
-	c = vec_length2(cross_(&oc, &cy->normal)) - pow(cy->diameter, 2);
-	discriminant = b * b - a * c;
-	if (discriminant >= 0)
+	if (dscrmnt_cy(&d, &ray, cy, &oc) == 1)
 	{
-		double tempt = (-1 * b - sqrt(discriminant)) / a;
-		if (tempt >= 0)
+		if ((rec->ishit == 0 || (rec->ishit && d.root < rec->t)))
 		{
-			double height = cy_get_height(ray, tempt, cy);
-			if (fabs(height) <= cy->height / 2 && (rec->ishit == 0 || (rec->ishit && tempt < rec->t)))
-			{
-				rec->ishit = 1;
-				rec->t = tempt;
-				rec->point = vec_plus(ray.origin, vec_scala(ray.dir, rec->t));
-				rec->n = cy_get_normal(rec->point, height, cy);
-				if (dot(&rec->n, &ray.dir) > 0)
-					rec->n = vec_scala(rec->n, -1);
-				rec->color = cy->color;
-				rec->type = CYLINDER;
-				rec->obj = obj;
-			}
-		}
-		tempt = (-1 * b + sqrt(discriminant)) / a;
-		if (tempt >= 0)
-		{
-			double height = cy_get_height(ray, tempt, cy);
-			if (fabs(height) <= cy->height / 2 && (rec->ishit == 0 || (rec->ishit && tempt < rec->t)))
-			{
-				rec->ishit = 1;
-				rec->t = tempt;
-				rec->point = vec_plus(ray.origin, vec_scala(ray.dir, rec->t));
-				rec->n = cy_get_normal(rec->point, height, cy);
-				if (dot(&rec->n, &ray.dir) > 0)
-					rec->n = vec_scala(rec->n, -1);
-				rec->color = cy->color;
-				rec->type = CYLINDER;
-				rec->obj = obj;
-			}
+			rec->ishit = 1;
+			rec->t = d.root;
+			rec->point = vec_plus(ray.origin, vec_scala(ray.dir, rec->t));
+			rec->n = cy_get_normal(rec->point, d.height, cy);
+			if (dot(&rec->n, &ray.dir) > 0)
+				rec->n = vec_scala(rec->n, -1);
+			rec->color = cy->color;
+			rec->type = CYLINDER;
+			rec->obj = obj;
 		}
 	}
-	hit_obj_cylinder_sp(ray, rec, cy, obj);
+	hit_obj_cylinder_cap(ray, rec, cy, obj);
 }

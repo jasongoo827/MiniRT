@@ -6,7 +6,7 @@
 /*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 13:38:28 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/23 15:07:59 by yakim            ###   ########.fr       */
+/*   Updated: 2024/04/23 20:59:47 by yakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,51 +26,23 @@ void	init_record(t_hit *rec)
 void	hit_obj_sphere(t_ray ray, t_hit *rec, t_sphere *sp, t_obj *obj)
 {
 	t_vector	oc;
-	double		a;
-	double		b;
-	double		c;
-	double		discriminant;
+	t_dscrmnt	d;
 
 	oc = vec_minus(ray.origin, sp->center);
-	a = dot(&ray.dir, &ray.dir);
-	b = dot(&oc, &ray.dir);
-	c = dot(&oc, &oc) - pow(sp->radius, 2);
-	discriminant = b * b - a * c;
-	if (discriminant >= 0)
+	if (dscrmnt_sp(&d, &ray, sp, &oc) == 1)
 	{
-		double tempt = (-1 * b - sqrt(discriminant)) / a;
-		if (tempt >= 0)
+		if ((rec->ishit == 0 || (rec->ishit && d.root < rec->t)))
 		{
-			if (rec->ishit == 0 || (rec->ishit && tempt < rec->t))
-			{
-				rec->ishit = 1;
-				rec->t = tempt;
-				rec->point = vec_plus(ray.origin, vec_scala(ray.dir, rec->t));
-				rec->n = vec_minus(rec->point, sp->center);
-				normalize_vector(&rec->n);
-				if (dot(&rec->n, &ray.dir) > 0)
-					rec->n = vec_scala(rec->n, -1);
-				rec->color = sp->color;
-				rec->type = SPHERE;
-				rec->obj = obj;
-			}
-		}
-		tempt = (-1 * b + sqrt(discriminant)) / a;
-		if (tempt >= 0)
-		{
-			if (rec->ishit == 0 || (rec->ishit && tempt < rec->t))
-			{
-				rec->ishit = 1;
-				rec->t = tempt;
-				rec->point = vec_plus(ray.origin, vec_scala(ray.dir, rec->t));
-				rec->n = vec_minus(rec->point, sp->center);
-				normalize_vector(&rec->n);
-				if (dot(&rec->n, &ray.dir) > 0)
-					rec->n = vec_scala(rec->n, -1);
-				rec->color = sp->color;
-				rec->type = SPHERE;
-				rec->obj = obj;
-			}
+			rec->ishit = 1;
+			rec->t = d.root;
+			rec->point = vec_plus(ray.origin, vec_scala(ray.dir, rec->t));
+			rec->n = vec_minus(rec->point, sp->center);
+			normalize_vector(&rec->n);
+			if (dot(&rec->n, &ray.dir) > 0)
+				rec->n = vec_scala(rec->n, -1);
+			rec->color = sp->color;
+			rec->type = SPHERE;
+			rec->obj = obj;
 		}
 	}
 }

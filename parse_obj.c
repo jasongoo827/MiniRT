@@ -6,7 +6,7 @@
 /*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 12:52:57 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/23 15:33:22 by yakim            ###   ########.fr       */
+/*   Updated: 2024/04/23 16:05:09 by yakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,14 +153,14 @@ void	parse_cone(char **arr, t_info *info)
 	cone->normal = parse_vector(ft_split(arr[2], ','), 1, 0, 0);
 	cone->height = ft_strtod(arr[3]);
 	cone->color = parse_vector(ft_split(arr[4], ','), 0, 0, 1);
-	if (arr[6] != NULL && BONUS)
+	if (arr[5] != NULL && BONUS)
 	{
-		if (ft_strcmp(arr[6], "ch") == 0)
+		if (ft_strcmp(arr[5], "ch") == 0)
 			obj->checker = 1;
 		else
-			parse_bonus(arr[6], info, &obj->tex, &obj->bump);
+			parse_bonus(arr[5], info, &obj->tex, &obj->bump);
 	}
-	else if (arr[6] != NULL)
+	else if (arr[5] != NULL)
 		cus_error("Error\nToo much arguments\n");
 	push_back(info->objarr, obj);
 }

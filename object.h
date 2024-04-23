@@ -6,7 +6,7 @@
 /*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 14:54:50 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/23 15:07:08 by yakim            ###   ########.fr       */
+/*   Updated: 2024/04/23 16:01:27 by yakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,8 +114,8 @@ typedef struct s_cone
 {
 	t_vector	center;
 	t_vector	normal;
-	double		height;
 	t_vector	color;
+	double		height;
 }	t_cone;
 
 typedef struct s_hit

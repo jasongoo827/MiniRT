@@ -6,7 +6,7 @@
 /*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 13:05:07 by jgoo              #+#    #+#             */
-/*   Updated: 2024/04/23 15:22:06 by yakim            ###   ########.fr       */
+/*   Updated: 2024/04/23 15:28:23 by yakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ t_vector	get_normal(t_info *info, int u2, int v2)
 	t_vector	z;
 
 	// 높이값 좀 더 나눌수도?
-	vec1 = vec4(1, (get_height(info, info->tex.size_line / 4 * v2 + u2 + 1) - \
-	get_height(info, info->tex.size_line / 4 * v2 + u2 - 1)) / 2.0, 0, 0);
-	vec2 = vec4(0, (get_height(info, info->tex.size_line / 4 * (v2 + 1) + u2) \
-	- get_height(info, info->tex.size_line / 4 * (v2 - 1) + u2)) / 2.0, 1, 0);
+	vec1 = vec4(1, (get_height(info, info->record.obj->bump.size_line / 4 * v2 + u2 + 1) - \
+	get_height(info, info->record.obj->bump.size_line / 4 * v2 + u2 - 1)) / 2.0, 0, 0);
+	vec2 = vec4(0, (get_height(info, info->record.obj->bump.size_line / 4 * (v2 + 1) + u2) \
+	- get_height(info, info->record.obj->bump.size_line / 4 * (v2 - 1) + u2)) / 2.0, 1, 0);
 	normal = cross_(&vec2, &vec1);
 	z = vec4(0, 0, 1, 0);
 	if (dot_(info->record.point, z) < 0)
@@ -95,8 +95,8 @@ void	bump(t_info *info, t_uv *uv)
 	
 	if (!uv->init)
 		sphere_map(info, &uv->u, &uv->v);
-	u2 = (1 - uv->u) * (info->tex.width - 1);
-	v2 = (1 - uv->v) * (info->tex.height - 1);
+	u2 = (1 - uv->u) * (info->record.obj->bump.width - 1);
+	v2 = (1 - uv->v) * (info->record.obj->bump.height - 1);
 	normal = get_normal(info, u2, v2);
 	convert_normal(info, normal);	
 }
@@ -111,9 +111,9 @@ void	texture(t_info *info, t_uv *uv)
 		sphere_map(info, &uv->u, &uv->v);
 	// plane_map(info, &uv->u, &uv->v);
 	uv->init = 1;
-	u2 = (1 - uv->u) * (info->tex.width - 1);
-	v2 = (1 - uv->v) * (info->tex.height - 1);
-	color = info->tex.addr[info->tex.size_line / 4 * v2 + u2];
+	u2 = (1 - uv->u) * (info->record.obj->tex.width - 1);
+	v2 = (1 - uv->v) * (info->record.obj->tex.height - 1);
+	color = info->record.obj->tex.addr[info->record.obj->tex.size_line / 4 * v2 + u2];
 	info->record.color.d[X] = ((color & 0XFF0000) >> 16) / 255.999;
 	info->record.color.d[Y] = ((color & 0X00FF00) >> 8) / 255.999;
 	info->record.color.d[Z] = (color & 0X0000FF) / 255.999;

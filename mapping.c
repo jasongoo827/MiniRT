@@ -6,7 +6,7 @@
 /*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 18:48:41 by jgoo              #+#    #+#             */
-/*   Updated: 2024/04/23 15:17:41 by yakim            ###   ########.fr       */
+/*   Updated: 2024/04/23 15:27:29 by yakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,6 @@ double	get_height(t_info *info, int idx)
 {
 	int	bump;
 
-	bump = info->bump.addr[idx];
+	bump = info->record.obj->bump.addr[idx];
 	return ((bump & 0XFF0000) >> 16);
 }

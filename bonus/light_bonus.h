@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   essential.h                                        :+:      :+:    :+:   */
+/*   light_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jgoo <jgoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/23 19:08:33 by jgoo              #+#    #+#             */
-/*   Updated: 2024/04/24 14:28:23 by jgoo             ###   ########.fr       */
+/*   Created: 2024/04/12 16:58:21 by yakim             #+#    #+#             */
+/*   Updated: 2024/04/24 14:30:22 by jgoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ESSENTIAL_H
-# define ESSENTIAL_H
+#ifndef LIGHT_BONUS_H
+# define LIGHT_BONUS_H
 
-# include <stdlib.h>
-# include <math.h>
-# include "mlx.h"
-# include <fcntl.h>
-# include "./Libft/libft/libft.h"
-# include "./Libft/gnl/get_next_line.h"
+# include "essential_bonus.h"
+# include "object_bonus.h"
 
-# define BONUS 1
+# define DIFFUSE 1
+# define SPECULAR 0.7
+# define SHINE 16
+
+t_vector	phong_lightning(t_info *info);
 
 #endif

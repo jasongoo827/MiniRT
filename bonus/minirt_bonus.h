@@ -1,25 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   essential.h                                        :+:      :+:    :+:   */
+/*   minirt_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jgoo <jgoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/23 19:08:33 by jgoo              #+#    #+#             */
-/*   Updated: 2024/04/24 14:28:23 by jgoo             ###   ########.fr       */
+/*   Created: 2024/04/23 19:52:00 by jgoo              #+#    #+#             */
+/*   Updated: 2024/04/24 14:31:07 by jgoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ESSENTIAL_H
-# define ESSENTIAL_H
+#ifndef MINIRT_BONUS_H
+# define MINIRT_BONUS_H
 
-# include <stdlib.h>
-# include <math.h>
-# include "mlx.h"
-# include <fcntl.h>
-# include "./Libft/libft/libft.h"
-# include "./Libft/gnl/get_next_line.h"
-
-# define BONUS 1
+# include "essential_bonus.h"
+# define KEY_ESC 53
 
 #endif

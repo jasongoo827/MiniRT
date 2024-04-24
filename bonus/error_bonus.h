@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   essential.h                                        :+:      :+:    :+:   */
+/*   error_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jgoo <jgoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/23 19:08:33 by jgoo              #+#    #+#             */
-/*   Updated: 2024/04/24 14:28:23 by jgoo             ###   ########.fr       */
+/*   Created: 2024/04/23 19:08:15 by jgoo              #+#    #+#             */
+/*   Updated: 2024/04/24 14:30:41 by jgoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ESSENTIAL_H
-# define ESSENTIAL_H
+#ifndef ERROR_BONUS_H
+# define ERROR_BONUS_H
 
-# include <stdlib.h>
-# include <math.h>
-# include "mlx.h"
-# include <fcntl.h>
-# include "./Libft/libft/libft.h"
-# include "./Libft/gnl/get_next_line.h"
+# include "essential_bonus.h"
 
-# define BONUS 1
+# define MALLOC_ERR "Memory Allocation Failed!\n"
+
+// error.c
+void	null_check(void *ptr);
+void	cus_error(char *message);
 
 #endif

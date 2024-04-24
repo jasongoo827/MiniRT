@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   essential.h                                        :+:      :+:    :+:   */
+/*   error_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jgoo <jgoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/23 19:08:33 by jgoo              #+#    #+#             */
-/*   Updated: 2024/04/24 14:28:23 by jgoo             ###   ########.fr       */
+/*   Created: 2024/04/09 20:16:49 by yakim             #+#    #+#             */
+/*   Updated: 2024/04/24 14:27:31 by jgoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ESSENTIAL_H
-# define ESSENTIAL_H
+#include "error_bonus.h"
 
-# include <stdlib.h>
-# include <math.h>
-# include "mlx.h"
-# include <fcntl.h>
-# include "./Libft/libft/libft.h"
-# include "./Libft/gnl/get_next_line.h"
+void	null_check(void *ptr)
+{
+	if (ptr == NULL)
+	{
+		ft_putstr_fd(MALLOC_ERR, 2);
+		exit (1);
+	}
+}
 
-# define BONUS 1
-
-#endif
+void	cus_error(char *message)
+{
+	ft_putstr_fd(message, 2);
+	exit(1);
+}

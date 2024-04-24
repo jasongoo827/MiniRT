@@ -26,6 +26,15 @@
 		"utility": "c",
 		"vector": "c",
 		"__locale": "c",
-		"complex": "c"
+		"complex": "c",
+		"object_bonus.h": "c",
+		"error_bonus.h": "c",
+		"essential_bonus.h": "c",
+		"parse_bonus.h": "c",
+		"matrix_bonus.h": "c",
+		"get_next_line.h": "c",
+		"data_struct_bonus.h": "c",
+		"utils.h": "c",
+		"utils_bonus.h": "c"
 	}
 }

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_obj2.c                                       :+:      :+:    :+:   */
+/*   parse_obj2_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jgoo <jgoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 14:41:50 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/24 14:20:31 by jgoo             ###   ########.fr       */
+/*   Updated: 2024/04/24 14:32:22 by jgoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "essential.h"
-#include "parse.h"
-#include "utils.h"
+#include "essential_bonus.h"
+#include "parse_bonus.h"
+#include "utils_bonus.h"
 
 void	parse_cylinder(char **arr, t_info *info)
 {

@@ -30,9 +30,13 @@ SRCS = main.c \
 		utils3.c \
 		texture.c \
 		mapping.c
-		
+
+# BNS_SRCS =
+
 OBJS = $(SRCS:.c=.o)
 DEPS = $(SRCS:.c=.d)
+# BNS_OBJS = $(BNS_SRCS:%.c=%.o)
+# BNS_DEPS = $(BNS_SRCS:%.c=%.d)
 MLX_DIR = ./mlx
 MLX_LIB = libmlx.dylib
 LIBFT_DIR = ./Libft/libft
@@ -40,8 +44,16 @@ LIBFT_LIB = libft.a
 GNL_DIR = ./Libft/gnl
 GNL_LIB = libftgnl.a
 -include $(DEPS)
+# -include $(BNS_DEPS)
+
+ifdef ADD_BNS
+        OBJS := $(BNS_OBJS)
+endif
 
 all : $(NAME)
+
+# bonus: 
+#     @ADD_BNS=1 make
 
 $(NAME) : $(OBJS) $(MLX_DIR)/$(MLX_LIB) $(LIBFT_DIR)/$(LIBFT_LIB) $(GNL_DIR)/$(GNL_LIB)
 	$(CC) $(CFLAGS) $(MLXFLAGS) $^ -o $(NAME)

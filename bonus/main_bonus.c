@@ -6,7 +6,7 @@
 /*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:36:40 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/24 19:25:15 by yakim            ###   ########.fr       */
+/*   Updated: 2024/04/24 20:44:37 by yakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 int	win_init(void *mlx, void **win)
 {
-	*win = mlx_new_window(mlx, 1920, 1080, "minirt");
+	*win = mlx_new_window(mlx, WIDTH, HEIGHT, "minirt");
 	mlx_clear_window(mlx, *win);
 	return (0);
 }
@@ -44,7 +44,7 @@ static int	exit_window(t_info *info)
 
 void	set_image(t_info *info)
 {
-	info->img.img_ptr = mlx_new_image(info->mlx, 1920, 1080);
+	info->img.img_ptr = mlx_new_image(info->mlx, WIDTH, HEIGHT);
 	info->img.addr = mlx_get_data_addr(info->img.img_ptr, \
 	&info->img.bits_per_pixel, &info->img.size_line, &info->img.endian);
 	set_scene(info);

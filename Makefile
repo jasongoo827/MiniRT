@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: jgoo <jgoo@student.42.fr>                  +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/04/24 16:17:18 by jgoo              #+#    #+#              #
+#    Updated: 2024/04/24 16:31:35 by jgoo             ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 .DEFAULT_GOAL := all
 
 NAME = miniRT
@@ -78,6 +90,7 @@ all : $(NAME)
 
 bonus :
 	@ADD_BNS=1 make
+
 
 $(NAME) : $(OBJS) $(MLX_DIR)/$(MLX_LIB) $(LIBFT_DIR)/$(LIBFT_LIB) $(GNL_DIR)/$(GNL_LIB)
 	$(CC) $(CFLAGS) $(MLXFLAGS) $^ -o $(NAME)

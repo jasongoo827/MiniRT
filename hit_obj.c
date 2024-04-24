@@ -6,7 +6,7 @@
 /*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 13:38:28 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/23 20:59:47 by yakim            ###   ########.fr       */
+/*   Updated: 2024/04/24 12:01:16 by yakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	hit_obj_plane(t_ray ray, t_hit *rec, t_plane *plane, t_obj *obj)
 		return ;
 	oc = vec_minus(plane->point, ray.origin);
 	tempt = dot(&oc, &plane->normal) / divider;
-	if (tempt >= 0)
+	if (tempt > 0)
 	{
 		if (rec->ishit == 0 || (rec->ishit && tempt < rec->t))
 		{

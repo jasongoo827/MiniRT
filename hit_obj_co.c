@@ -6,7 +6,7 @@
 /*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:25:11 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/23 21:03:07 by yakim            ###   ########.fr       */
+/*   Updated: 2024/04/24 13:29:43 by yakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	hit_obj_cone_cap(t_ray ray, t_hit *rec, t_cone *co, t_obj *obj)
 	cap = vec_plus(co->center, vec_scala(co->normal, co->height));
 	oc = vec_minus(cap, ray.origin);
 	tempt = dot(&oc, &co->normal) / divider;
-	if (tempt >= 0)
+	if (tempt > 0)
 	{
 		point = vec_plus(ray.origin, vec_scala(ray.dir, tempt));
 		if (vec_length2(vec_minus(point, cap)) <= pow(co->height, 2) && \
@@ -88,4 +88,3 @@ void	hit_obj_cone(t_ray ray, t_hit *rec, t_cone *co, t_obj *obj)
 	}
 	hit_obj_cone_cap(ray, rec, co, obj);
 }
-	

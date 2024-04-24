@@ -6,7 +6,7 @@
 /*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 16:23:48 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/23 21:03:21 by yakim            ###   ########.fr       */
+/*   Updated: 2024/04/24 13:30:15 by yakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	hit_obj_cylinder_cap(t_ray ray, t_hit *rec, t_cylinder *cy, t_obj *obj)
 	cap = vec_plus(cy->center, vec_scala(cy->normal, cy->height / 2));
 	oc = vec_minus(cap, ray.origin);
 	tempt = dot(&oc, &cy->normal) / divider;
-	if (tempt >= 0)
+	if (tempt > 0)
 	{
 		point = vec_plus(ray.origin, vec_scala(ray.dir, tempt));
 		if (vec_length2(vec_minus(point, cap)) <= pow(cy->diameter, 2) && (rec->ishit == 0 || (rec->ishit && tempt < rec->t)))
@@ -65,7 +65,7 @@ void	hit_obj_cylinder_cap(t_ray ray, t_hit *rec, t_cylinder *cy, t_obj *obj)
 	cap = vec_minus(cy->center, vec_scala(cy->normal, cy->height / 2));
 	oc = vec_minus(cap, ray.origin);
 	tempt = dot(&oc, &cy->normal) / divider;
-	if (tempt >= 0)
+	if (tempt > 0)
 	{
 		point = vec_plus(ray.origin, vec_scala(ray.dir, tempt));
 		if (vec_length2(vec_minus(point, cap)) <= pow(cy->diameter, 2) && (rec->ishit == 0 || (rec->ishit && tempt < rec->t)))

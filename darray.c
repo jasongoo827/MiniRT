@@ -6,7 +6,7 @@
 /*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 10:35:04 by jgoo              #+#    #+#             */
-/*   Updated: 2024/04/19 14:17:53 by yakim            ###   ########.fr       */
+/*   Updated: 2024/04/24 10:52:57 by yakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ void	free_array(t_darray *array)
 	if (array == NULL)
 		return ;
 	i = -1;
-	// 만약에 할당된 메모리가 array에 저장되어있다면 해제
 	if (array->size != 0)
 	{
 		while (++i < array->size)

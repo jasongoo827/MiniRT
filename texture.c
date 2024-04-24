@@ -6,7 +6,7 @@
 /*   By: jgoo <jgoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 13:05:07 by jgoo              #+#    #+#             */
-/*   Updated: 2024/04/23 19:57:35 by jgoo             ###   ########.fr       */
+/*   Updated: 2024/04/24 13:29:55 by jgoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	checkerboard(t_info *info)
 		cylinder_map(info, &u, &v);
 	else if (info->record.obj->type == CONE)
 		cylinder_map(info, &u, &v);
+	else
+		return ;
 	u2 = floor(u * 8);
 	v2 = floor(v * 8);
 	if ((u2 + v2) % 2 == 0)
@@ -79,8 +81,12 @@ void	bump(t_info *info, t_uv *uv)
 	int			u2;
 	int			v2;
 
-	if (!uv->init)
+	if (info->record.obj->type == SPHERE)
 		sphere_map(info, &uv->u, &uv->v);
+	else if (info->record.obj->type == PLANE)
+		plane_map(info, &uv->u, &uv->v);
+	else
+		return ;
 	u2 = (1 - uv->u) * (info->record.obj->bump.width - 1);
 	v2 = (1 - uv->v) * (info->record.obj->bump.height - 1);
 	normal = get_normal(info, u2, v2);
@@ -97,10 +103,8 @@ void	texture(t_info *info, t_uv *uv)
 		sphere_map(info, &uv->u, &uv->v);
 	else if (info->record.obj->type == PLANE)
 		plane_map(info, &uv->u, &uv->v);
-	else if (info->record.obj->type == CYLINDER)
-		cylinder_map(info, &uv->u, &uv->v);
-	else if (info->record.obj->type == CONE)
-		cylinder_map(info, &uv->u, &uv->v);
+	else
+		return ;
 	u2 = (1 - uv->u) * (info->record.obj->tex.width - 1);
 	v2 = (1 - uv->v) * (info->record.obj->tex.height - 1);
 	color = info->record.obj->tex.addr[info->record.obj->tex.size_line \

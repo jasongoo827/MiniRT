@@ -10,7 +10,7 @@ NAME = miniRT
 SRCS = main.c \
 		parse.c \
 		parse_obj.c \
-		parse_utils.c \
+		parse_obj2.c \
 		object.c \
 		hit_obj.c \
 		hit_obj_cy.c \
@@ -27,6 +27,7 @@ SRCS = main.c \
 		settings.c \
 		utils.c \
 		utils2.c \
+		utils3.c \
 		texture.c \
 		mapping.c
 		

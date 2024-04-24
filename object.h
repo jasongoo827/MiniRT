@@ -6,7 +6,7 @@
 /*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 14:54:50 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/23 21:04:01 by yakim            ###   ########.fr       */
+/*   Updated: 2024/04/24 11:31:07 by yakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "data_struct.h"
 # include "matrix.h"
 
-typedef struct s_darray t_darray;
+typedef struct s_darray	t_darray;
 
 typedef enum e_type
 {
@@ -28,7 +28,7 @@ typedef enum e_type
 	CONE
 }	t_type;
 
-typedef struct s_vector t_vector;
+typedef struct s_vector	t_vector;
 
 typedef struct s_dscrmnt
 {
@@ -162,7 +162,7 @@ t_hit	hit_obj(t_info *info, t_ray ray, t_hit record);
 void	hit_obj_sphere(t_ray ray, t_hit *record, t_sphere *sphere, t_obj *obj);
 int		dscrmnt_sp(t_dscrmnt *d, t_ray *ray, t_sphere *sp, t_vector *oc);
 void	hit_obj_plane(t_ray ray, t_hit *record, t_plane *plane, t_obj *obj);
-void	hit_obj_cylinder(t_ray ray, t_hit *record, t_cylinder *cylinder, t_obj *obj);
+void	hit_obj_cylinder(t_ray ray, t_hit *record, t_cylinder *cy, t_obj *obj);
 int		dscrmnt_cy(t_dscrmnt *d, t_ray *ray, t_cylinder *cy, t_vector *oc);
 void	hit_obj_cone(t_ray ray, t_hit *rec, t_cone *co, t_obj *obj);
 int		dscrmnt_co(t_dscrmnt *d, t_ray *ray, t_cone *co, t_vector *oc);

@@ -6,13 +6,15 @@
 /*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 11:04:13 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/24 14:18:39 by yakim            ###   ########.fr       */
+/*   Updated: 2024/04/24 19:28:49 by yakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "essential.h"
 #include "utils.h"
 #include "error.h"
+#include "object.h"
+#include "mlx.h"
 
 int	ft_isspace(char c)
 {
@@ -68,4 +70,33 @@ double	ft_strtod(const char *str)
 	if (sign)
 		return (d * -1);
 	return (d);
+}
+
+
+void	free_arr(t_darray *darray)
+{
+	int		i;
+	t_obj	*obj;
+
+	if (darray == NULL)
+		return ;
+	i = -1;
+	if (darray->size != 0)
+	{
+		while (++i < darray->size)
+		{
+			obj = (t_obj *)darray->arr[i];
+			free(obj->ptr);
+			free(darray->arr[i]);
+		}
+	}
+	if (darray->arr != NULL)
+		free(darray->arr);
+	free(darray);
+}
+
+void	free_info(t_info *info)
+{
+	free_arr(info->lightarr);
+	free_arr(info->objarr);
 }

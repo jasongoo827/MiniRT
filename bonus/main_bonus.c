@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgoo <jgoo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:36:40 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/24 14:29:15 by jgoo             ###   ########.fr       */
+/*   Updated: 2024/04/24 19:25:15 by yakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "object_bonus.h"
 #include "scene_bonus.h"
 #include "parse_bonus.h"
+#include "utils_bonus.h"
 
 int	win_init(void *mlx, void **win)
 {
@@ -23,15 +24,11 @@ int	win_init(void *mlx, void **win)
 	return (0);
 }
 
-void	l(void)
-{
-	system("leaks $PPID");
-}
-
 static int	key_hook(int keycode, t_info *info)
 {
 	if (keycode == KEY_ESC)
 	{
+		free_info(info);
 		mlx_destroy_window(info->mlx, info->win);
 		exit(0);
 	}
@@ -40,6 +37,7 @@ static int	key_hook(int keycode, t_info *info)
 
 static int	exit_window(t_info *info)
 {
+	free_info(info);
 	mlx_destroy_window(info->mlx, info->win);
 	exit(0);
 }
@@ -58,7 +56,6 @@ int	main(int argc, char **argv)
 {
 	t_info	info;
 
-	// atexit(l);
 	ft_bzero(&info, sizeof(t_info));
 	info.mlx = mlx_init();
 	win_init(info.mlx, &info.win);

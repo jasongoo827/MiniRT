@@ -6,7 +6,7 @@
 /*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 14:54:50 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/24 16:04:57 by yakim            ###   ########.fr       */
+/*   Updated: 2024/04/24 16:44:53 by yakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,8 +143,6 @@ typedef struct s_info
 {
 	void		*mlx;
 	void		*win;
-	t_texture	tex;
-	t_texture	bump;
 	t_ambient	ambient;
 	t_camera	camera;
 	t_darray	*lightarr;

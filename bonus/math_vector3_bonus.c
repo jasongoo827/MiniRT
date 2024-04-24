@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   math_vector3_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgoo <jgoo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 19:24:27 by jgoo              #+#    #+#             */
-/*   Updated: 2024/04/24 14:29:57 by jgoo             ###   ########.fr       */
+/*   Updated: 2024/04/24 19:10:17 by yakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	init_k(double k[3][3], t_vector new_axis)
 	k[1][2] = -new_axis.d[X];
 	k[2][0] = -new_axis.d[Y];
 	k[2][1] = new_axis.d[X];
-	k[3][2] = 0;
+	k[2][2] = 0;
 }
 
 void	init_i(double i[3][3])

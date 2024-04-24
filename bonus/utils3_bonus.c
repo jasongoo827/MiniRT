@@ -6,13 +6,14 @@
 /*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 11:04:13 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/24 16:18:06 by yakim            ###   ########.fr       */
+/*   Updated: 2024/04/24 19:31:40 by yakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "essential_bonus.h"
 #include "utils_bonus.h"
 #include "error_bonus.h"
+#include "object_bonus.h"
 
 int	ft_isspace(char c)
 {
@@ -68,4 +69,37 @@ double	ft_strtod(const char *str)
 	if (sign)
 		return (d * -1);
 	return (d);
+}
+
+
+void	free_arr(void *mlx, t_darray *darray)
+{
+	int		i;
+	t_obj	*obj;
+
+	if (darray == NULL)
+		return ;
+	i = -1;
+	if (darray->size != 0)
+	{
+		while (++i < darray->size)
+		{
+			obj = (t_obj *)darray->arr[i];
+			if (obj->tex.tex_ptr)
+				mlx_destroy_image(mlx, obj->tex.tex_ptr);
+			if (obj->bump.tex_ptr)
+				mlx_destroy_image(mlx, obj->bump.tex_ptr);
+			free(obj->ptr);
+			free(darray->arr[i]);
+		}
+	}
+	if (darray->arr != NULL)
+		free(darray->arr);
+	free(darray);
+}
+
+void	free_info(t_info *info)
+{
+	free_arr(info->mlx, info->lightarr);
+	free_arr(info->mlx, info->objarr);
 }

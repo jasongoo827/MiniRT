@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hit_obj_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgoo <jgoo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 13:38:28 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/24 14:28:38 by jgoo             ###   ########.fr       */
+/*   Updated: 2024/04/24 16:19:44 by yakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,13 +84,17 @@ t_hit	hit_obj(t_info *info, t_ray ray, t_hit rec)
 	while (i < info->objarr->size)
 	{
 		if (((t_obj *)(info->objarr->arr[i]))->type == SPHERE)
-			hit_obj_sphere(ray, &rec, ((t_obj *)(info->objarr->arr[i]))->ptr, info->objarr->arr[i]);
+			hit_obj_sphere(ray, &rec, ((t_obj *)(info->objarr->arr[i]))->ptr, \
+			info->objarr->arr[i]);
 		else if (((t_obj *)(info->objarr->arr[i]))->type == PLANE)
-			hit_obj_plane(ray, &rec, ((t_obj *)(info->objarr->arr[i]))->ptr, info->objarr->arr[i]);
+			hit_obj_plane(ray, &rec, ((t_obj *)(info->objarr->arr[i]))->ptr, \
+			info->objarr->arr[i]);
 		else if (((t_obj *)(info->objarr->arr[i]))->type == CYLINDER)
-			hit_obj_cylinder(ray, &rec, ((t_obj *)(info->objarr->arr[i]))->ptr, info->objarr->arr[i]);
+			hit_obj_cylinder(ray, &rec, ((t_obj *)(info->objarr->arr[i]))->ptr, \
+			info->objarr->arr[i]);
 		else if (((t_obj *)(info->objarr->arr[i]))->type == CONE)
-			hit_obj_cone(ray, &rec, ((t_obj *)(info->objarr->arr[i]))->ptr, info->objarr->arr[i]);
+			hit_obj_cone(ray, &rec, ((t_obj *)(info->objarr->arr[i]))->ptr, \
+			info->objarr->arr[i]);
 		i++;
 	}
 	return (rec);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   discriminant_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgoo <jgoo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 16:46:58 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/24 14:27:26 by jgoo             ###   ########.fr       */
+/*   Updated: 2024/04/24 16:19:16 by yakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,46 @@ int	dscrmnt_co(t_dscrmnt *d, t_ray *ray, t_cone *co, t_vector *oc)
 	{
 		d->height = co_get_height(ray, d->root, co);
 		if (d->height <= co->height && d->height >= 0)
+			return (1);
+	}
+	return (0);
+}
+
+int	dscrmnt_cy_cap(t_dscrmnt *d, t_ray *ray, t_cylinder *cy, t_vector *cap)
+{
+	double		divider;
+	t_vector	oc;
+	t_vector	point;
+
+	divider = dot(&ray->dir, &cy->normal);
+	if (divider == 0)
+		return (0);
+	oc = vec_minus(*cap, ray->origin);
+	d->root = dot(&oc, &cy->normal) / divider;
+	if (d->root > 0)
+	{
+		point = vec_plus(ray->origin, vec_scala(ray->dir, d->root));
+		if (vec_length2(vec_minus(point, *cap)) <= pow(cy->diameter, 2))
+			return (1);
+	}
+	return (0);
+}
+
+int	dscrmnt_co_cap(t_dscrmnt *d, t_ray *ray, t_cone *co, t_vector *cap)
+{
+	double		divider;
+	t_vector	oc;
+	t_vector	point;
+
+	divider = dot(&ray->dir, &co->normal);
+	if (divider == 0)
+		return (0);
+	oc = vec_minus(*cap, ray->origin);
+	d->root = dot(&oc, &co->normal) / divider;
+	if (d->root > 0)
+	{
+		point = vec_plus(ray->origin, vec_scala(ray->dir, d->root));
+		if (vec_length2(vec_minus(point, *cap)) <= pow(co->height, 2))
 			return (1);
 	}
 	return (0);

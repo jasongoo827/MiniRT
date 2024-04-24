@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgoo <jgoo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 14:54:50 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/24 14:31:32 by jgoo             ###   ########.fr       */
+/*   Updated: 2024/04/24 16:27:54 by yakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,13 +160,15 @@ t_obj	*init_obj(t_type type);
 void	init_record(t_hit *record);
 t_hit	hit_obj(t_info *info, t_ray ray, t_hit record);
 void	hit_obj_sphere(t_ray ray, t_hit *record, t_sphere *sphere, t_obj *obj);
-int		dscrmnt_sp(t_dscrmnt *d, t_ray *ray, t_sphere *sp, t_vector *oc);
 void	hit_obj_plane(t_ray ray, t_hit *record, t_plane *plane, t_obj *obj);
 void	hit_obj_cylinder(t_ray ray, t_hit *record, t_cylinder *cy, t_obj *obj);
-int		dscrmnt_cy(t_dscrmnt *d, t_ray *ray, t_cylinder *cy, t_vector *oc);
 void	hit_obj_cone(t_ray ray, t_hit *rec, t_cone *co, t_obj *obj);
-int		dscrmnt_co(t_dscrmnt *d, t_ray *ray, t_cone *co, t_vector *oc);
 double	co_get_height(t_ray *ray, double t, t_cone *co);
 double	cy_get_height(t_ray *ray, double t, t_cylinder *cy);
+int		dscrmnt_sp(t_dscrmnt *d, t_ray *ray, t_sphere *sp, t_vector *oc);
+int		dscrmnt_cy(t_dscrmnt *d, t_ray *ray, t_cylinder *cy, t_vector *oc);
+int		dscrmnt_cy_cap(t_dscrmnt *d, t_ray *ray, t_cylinder *cy, t_vector *cap);
+int		dscrmnt_co(t_dscrmnt *d, t_ray *ray, t_cone *co, t_vector *oc);
+int		dscrmnt_co_cap(t_dscrmnt *d, t_ray *ray, t_cone *co, t_vector *cap);
 
 #endif

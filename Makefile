@@ -76,8 +76,8 @@ endif
 
 all : $(NAME)
 
-bonus:
-    @ADD_BNS=1 make
+bonus :
+	@ADD_BNS=1 make
 
 $(NAME) : $(OBJS) $(MLX_DIR)/$(MLX_LIB) $(LIBFT_DIR)/$(LIBFT_LIB) $(GNL_DIR)/$(GNL_LIB)
 	$(CC) $(CFLAGS) $(MLXFLAGS) $^ -o $(NAME)

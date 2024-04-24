@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hit_obj_co_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgoo <jgoo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:25:11 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/24 14:28:41 by jgoo             ###   ########.fr       */
+/*   Updated: 2024/04/24 16:18:56 by yakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,27 +34,17 @@ t_vector	co_get_normal(t_vector p, t_cone *co)
 
 void	hit_obj_cone_cap(t_ray ray, t_hit *rec, t_cone *co, t_obj *obj)
 {
-	double		tempt;
-	double		divider;
-	t_vector	oc;
 	t_vector	cap;
-	t_vector	point;
+	t_dscrmnt	d;
 
-	divider = dot(&ray.dir, &co->normal);
-	if (divider == 0)
-		return ;
 	cap = vec_plus(co->center, vec_scala(co->normal, co->height));
-	oc = vec_minus(cap, ray.origin);
-	tempt = dot(&oc, &co->normal) / divider;
-	if (tempt > 0)
+	if (dscrmnt_co_cap(&d, &ray, co, &cap) == 1)
 	{
-		point = vec_plus(ray.origin, vec_scala(ray.dir, tempt));
-		if (vec_length2(vec_minus(point, cap)) <= pow(co->height, 2) && \
-		(rec->ishit == 0 || (rec->ishit && tempt < rec->t)))
+		if (rec->ishit == 0 || (rec->ishit && d.root < rec->t))
 		{
 			rec->ishit = 1;
-			rec->t = tempt;
-			rec->point = point;
+			rec->t = d.root;
+			rec->point = vec_plus(ray.origin, vec_scala(ray.dir, d.root));
 			rec->n = co->normal;
 			if (dot(&rec->n, &ray.dir) > 0)
 				rec->n = vec_scala(rec->n, -1);

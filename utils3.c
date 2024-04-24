@@ -6,7 +6,7 @@
 /*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 11:04:13 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/24 11:11:27 by yakim            ###   ########.fr       */
+/*   Updated: 2024/04/24 14:18:39 by yakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,34 @@ int	ft_isspace(char c)
 	return (0);
 }
 
+void	ft_strtod_num(const char *str, double *d)
+{
+	double	n;
+
+	while (*str && *str != '.')
+	{
+		if (ft_isdigit(*str) == 0 && *str != '.')
+			cus_error("Error\nInput error\n");
+		*d = (*d * 10) + (double)(*str - '0');
+		str++;
+	}
+	if (*str == '.')
+		str++;
+	n = 0.1;
+	while (*str)
+	{
+		if (ft_isdigit(*str) == 0)
+			cus_error("Error\nInput error\n");
+		*d += (*str - '0') * n;
+		n /= 10;
+		str++;
+	}
+}
+
 double	ft_strtod(const char *str)
 {
 	double	d;
 	char	sign;
-	double	n;
 
 	d = 0.0;
 	sign = 0;
@@ -41,24 +64,7 @@ double	ft_strtod(const char *str)
 			sign = 1;
 		str++;
 	}
-	while (*str && *str != '.')
-	{
-		if (ft_isdigit(*str) == 0 && *str != '.')
-			cus_error("Error\nInput error\n");
-		d = (d * 10) + (double)(*str - '0');
-		str++;
-	}
-	if (*str == '.')
-		str++;
-	n = 0.1;
-	while (*str)
-	{
-		if (ft_isdigit(*str) == 0)
-			cus_error("Error\nInput error\n");
-		d += (*str - '0') * n;
-		n /= 10;
-		str++;
-	}
+	ft_strtod_num(str, &d);
 	if (sign)
 		return (d * -1);
 	return (d);

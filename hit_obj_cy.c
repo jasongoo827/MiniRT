@@ -6,7 +6,7 @@
 /*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 16:23:48 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/24 13:30:15 by yakim            ###   ########.fr       */
+/*   Updated: 2024/04/24 15:58:17 by yakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,28 +32,19 @@ t_vector	cy_get_normal(t_vector p, double height, t_cylinder *cy)
 	return (normal);
 }
 
-void	hit_obj_cylinder_cap(t_ray ray, t_hit *rec, t_cylinder *cy, t_obj *obj)
+void	hit_obj_cylinder_down(t_ray ray, t_hit *rec, t_cylinder *cy, t_obj *obj)
 {
-	double		tempt;
-	double		divider;
-	t_vector	oc;
 	t_vector	cap;
-	t_vector	point;
+	t_dscrmnt	d;
 
-	divider = dot(&ray.dir, &cy->normal);
-	if (divider == 0)
-		return ;
-	cap = vec_plus(cy->center, vec_scala(cy->normal, cy->height / 2));
-	oc = vec_minus(cap, ray.origin);
-	tempt = dot(&oc, &cy->normal) / divider;
-	if (tempt > 0)
+	cap = vec_minus(cy->center, vec_scala(cy->normal, cy->height / 2));
+	if (dscrmnt_cy_cap(&d, &ray, cy, &cap) == 1)
 	{
-		point = vec_plus(ray.origin, vec_scala(ray.dir, tempt));
-		if (vec_length2(vec_minus(point, cap)) <= pow(cy->diameter, 2) && (rec->ishit == 0 || (rec->ishit && tempt < rec->t)))
+		if (rec->ishit == 0 || (rec->ishit && d.root < rec->t))
 		{
 			rec->ishit = 1;
-			rec->t = tempt;
-			rec->point = point;
+			rec->t = d.root;
+			rec->point = vec_plus(ray.origin, vec_scala(ray.dir, d.root));
 			rec->n = cy->normal;
 			if (dot(&rec->n, &ray.dir) > 0)
 				rec->n = vec_scala(rec->n, -1);
@@ -62,17 +53,21 @@ void	hit_obj_cylinder_cap(t_ray ray, t_hit *rec, t_cylinder *cy, t_obj *obj)
 			rec->obj = obj;
 		}
 	}
-	cap = vec_minus(cy->center, vec_scala(cy->normal, cy->height / 2));
-	oc = vec_minus(cap, ray.origin);
-	tempt = dot(&oc, &cy->normal) / divider;
-	if (tempt > 0)
+}
+
+void	hit_obj_cylinder_up(t_ray ray, t_hit *rec, t_cylinder *cy, t_obj *obj)
+{
+	t_vector	cap;
+	t_dscrmnt	d;
+
+	cap = vec_plus(cy->center, vec_scala(cy->normal, cy->height / 2));
+	if (dscrmnt_cy_cap(&d, &ray, cy, &cap) == 1)
 	{
-		point = vec_plus(ray.origin, vec_scala(ray.dir, tempt));
-		if (vec_length2(vec_minus(point, cap)) <= pow(cy->diameter, 2) && (rec->ishit == 0 || (rec->ishit && tempt < rec->t)))
+		if (rec->ishit == 0 || (rec->ishit && d.root < rec->t))
 		{
 			rec->ishit = 1;
-			rec->t = tempt;
-			rec->point = point;
+			rec->t = d.root;
+			rec->point = vec_plus(ray.origin, vec_scala(ray.dir, d.root));
 			rec->n = cy->normal;
 			if (dot(&rec->n, &ray.dir) > 0)
 				rec->n = vec_scala(rec->n, -1);
@@ -104,5 +99,6 @@ void	hit_obj_cylinder(t_ray ray, t_hit *rec, t_cylinder *cy, t_obj *obj)
 			rec->obj = obj;
 		}
 	}
-	hit_obj_cylinder_cap(ray, rec, cy, obj);
+	hit_obj_cylinder_up(ray, rec, cy, obj);
+	hit_obj_cylinder_down(ray, rec, cy, obj);
 }

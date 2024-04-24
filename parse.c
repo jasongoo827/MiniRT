@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgoo <jgoo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 19:12:19 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/24 13:41:15 by jgoo             ###   ########.fr       */
+/*   Updated: 2024/04/24 14:09:27 by yakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,35 @@
 #include "object.h"
 #include "parse.h"
 #include "utils.h"
+
+t_vector	parse_vector(char **arr, int isnorm, int ispoint, int iscolor)
+{
+	t_vector	v;
+	int			i;
+
+	if (arr == NULL)
+		cus_error("Error\nLess arguments in vector input\n");
+	v = vec4(0, 0, 0, 0);
+	i = -1;
+	while (++i < 3)
+	{
+		v.d[i] = ft_strtod(arr[i]);
+		if (iscolor)
+		{
+			if (v.d[i] < 0 || v.d[i] > 255)
+				cus_error("Error\nColor input out of range\n");
+			v.d[i] /= 255.999;
+		}
+	}
+	if (ispoint)
+		v.d[3] = 1;
+	if (isnorm && (pow(v.d[0], 2) + pow(v.d[1], 2) + pow(v.d[2], 2) != 1))
+		cus_error("Error\nNot normalized vector input\n");
+	if (arr[i])
+		cus_error("Error\nMore arguments in vector input\n");
+	free_split(arr);
+	return (v);
+}
 
 void	parse_object(char *line, t_info *info)
 {

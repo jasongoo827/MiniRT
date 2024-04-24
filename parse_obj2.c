@@ -6,7 +6,7 @@
 /*   By: yakim <yakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 14:41:50 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/24 13:35:34 by yakim            ###   ########.fr       */
+/*   Updated: 2024/04/24 14:00:15 by yakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	parse_bonus(char *str, t_info *info, t_texture *tex, t_texture *bump)
 		tex->tex_ptr = mlx_xpm_file_to_image(info->mlx, temp[0], \
 		&tex->width, &tex->height);
 		if (tex->tex_ptr == 0)
-			cus_error("Error\nInvalid bonus argument input\n");
+			cus_error("Error\nCannot open image\n");
 		tex->addr = (int *)mlx_get_data_addr(tex->tex_ptr, \
 		&tex->bits_per_pixel, &tex->size_line, &tex->endian);
 	}
@@ -89,38 +89,11 @@ void	parse_bonus(char *str, t_info *info, t_texture *tex, t_texture *bump)
 		bump->tex_ptr = mlx_xpm_file_to_image(info->mlx, temp[1], \
 		&bump->width, &bump->height);
 		if (bump->tex_ptr == 0)
-			cus_error("Error\nInvalid bonus argument input\n");
+			cus_error("Error\nCannot open image\n");
 		bump->addr = (int *)mlx_get_data_addr(bump->tex_ptr, \
 		&bump->bits_per_pixel, &bump->size_line, &bump->endian);
 	}
+	if (temp[1] != NULL && temp[2] != NULL)
+		cus_error("Error\nToo much arguments\n");
 	free_split(temp);
-}
-
-t_vector	parse_vector(char **arr, int isnorm, int ispoint, int iscolor)
-{
-	t_vector	v;
-	int			i;
-
-	if (arr == NULL)
-		cus_error("Error\nLess arguments in vector input\n");
-	v = vec4(0, 0, 0, 0);
-	i = -1;
-	while (++i < 3)
-	{
-		v.d[i] = ft_strtod(arr[i]);
-		if (iscolor)
-		{
-			if (v.d[i] < 0 || v.d[i] > 255)
-				cus_error("Error\nColor input out of range\n");
-			v.d[i] /= 255.999;
-		}
-	}
-	if (ispoint)
-		v.d[3] = 1;
-	if (isnorm && (pow(v.d[0], 2) + pow(v.d[1], 2) + pow(v.d[2], 2) != 1))
-		cus_error("Error\nNot normalized vector input\n");
-	if (arr[i])
-		cus_error("Error\nMore arguments in vector input\n");
-	free_split(arr);
-	return (v);
 }

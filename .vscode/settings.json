@@ -35,6 +35,7 @@
 		"get_next_line.h": "c",
 		"data_struct_bonus.h": "c",
 		"utils.h": "c",
-		"utils_bonus.h": "c"
+		"utils_bonus.h": "c",
+		"math.h": "c"
 	}
 }

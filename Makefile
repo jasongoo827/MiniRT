@@ -6,7 +6,7 @@
 #    By: jgoo <jgoo@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/24 16:17:18 by jgoo              #+#    #+#              #
-#    Updated: 2024/04/24 16:31:35 by jgoo             ###   ########.fr        #
+#    Updated: 2024/07/01 09:05:58 by jgoo             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NAME = miniRT
 CC = cc
 RM = rm -f
 
-CFLAGS = -Wall -Wextra -Werror -MMD -MP -g -Imlx
+CFLAGS = -Wall -Wextra -Werror -MMD -MP -g -Imlx -Iinclude -ILibft
 MLXFLAGS = -lmlx -Lmlx -framework OpenGL -framework AppKit
 
 SRCS = main.c \

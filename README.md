@@ -61,6 +61,12 @@ Phong Model은 컴퓨터 그래픽스에서 물체의 표면에 대한 조명과
 해당 방법을 참고하지는 않았지만, 뷰포트 설정이나 광선 충돌에 관한 이론적인 부분에 대해 설명을 잘 해놓았다.
 - [texture-mapping](http://raytracerchallenge.com/bonus/texture-mapping.html) : texture mapping을 어떻게 하는지 이론적인 부분을 잘 설명해 놓은 사이트. checker board부터 image mapping까지 다양한 정보에 대해 나와있다.
 
+## 좀 더 이론적인 설명이 궁금하다면
+- [Ray Tracing 구현과정](https://learnopengl.com/Lighting/Basic-Lighting)
+- [Phong model](https://raytracing.github.io/books/RayTracingInOneWeekend.html)
+- [Texture-mapping](http://raytracerchallenge.com/bonus/texture-mapping.html) 
+
+
 ## 프로젝트를 직접 테스트 하고 싶다면..
 
 ```sh

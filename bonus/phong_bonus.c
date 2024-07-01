@@ -6,7 +6,7 @@
 /*   By: jgoo <jgoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 16:46:21 by yakim             #+#    #+#             */
-/*   Updated: 2024/04/24 14:32:28 by jgoo             ###   ########.fr       */
+/*   Updated: 2024/07/01 15:54:19 by jgoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	check_shadow(t_info *info, t_light *light)
 	normalize_vector(&ray.dir);
 	ray.origin = vec_plus(ray.origin, vec_scala(info->record.n, 0.001));
 	record_shadow = hit_obj(info, ray, record_shadow);
-	if (record_shadow.ishit && record_shadow.t < t_max)
+	if (record_shadow.ishit && record_shadow.t < t_max) // 광원 뒤에서 부딪힐 수 있음
 		return (1);
 	return (0);
 }

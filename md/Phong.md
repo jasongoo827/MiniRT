@@ -105,7 +105,7 @@ t_vector	diffuse(t_info *info, t_vector *pl, t_light *light)
 
 ```
 
-##Specular Light
+## Specular Light
 
 ```c
 // 광원 -> 교점, 카메라 -> 교점의 반사광 간의 각도를 구한다. 

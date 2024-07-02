@@ -33,7 +33,7 @@ t_vector	phong_lightning(t_info *info)
 	// Ambient Light 계산 - 입력값으로 주어지는 비율만 곱해주면 된다.
 	color = vec_scala(info->ambient.color, info->ambient.ratio);
 	i = 0;
-	// 저장되어 있는 광원을 순회하면 계산한다.
+	// 저장되어 있는 광원을 순회하면서 계산한다.
 	while (i < info->lightarr->size)
 	{
 		light = ((t_obj *)(info->lightarr->arr[i]))->ptr;

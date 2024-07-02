@@ -106,6 +106,3 @@ void	texture(t_info *info, t_uv *uv)
 
 ![earth](../images/earth.png)
 
-# Bump Map
-
-Bump Map을 입히는 것은 방법이 살짝 다르다. 표면의 울퉁불퉁한 질감을 표현해야 되기 때문에, Rendering되는 표면의 법선 벡터를 적당한 각도로 회전시켜줘야 한다.

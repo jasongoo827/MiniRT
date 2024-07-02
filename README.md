@@ -70,6 +70,7 @@ Phong Model은 컴퓨터 그래픽스에서 물체의 표면에 대한 조명과
 ## 프로젝트를 직접 테스트 하고 싶다면..
 
 ```sh
+## macOS 환경이 아니면 실행이 안 될 수 있습니다. 
 git clone https://github.com/jasongoo827/MiniRT.git
 
 ## 기본 Ray tracing 테스트 (Ambient light, Diffuse light)

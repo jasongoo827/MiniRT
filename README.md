@@ -62,9 +62,9 @@ Phong Model은 컴퓨터 그래픽스에서 물체의 표면에 대한 조명과
 - [texture-mapping](http://raytracerchallenge.com/bonus/texture-mapping.html) : texture mapping을 어떻게 하는지 이론적인 부분을 잘 설명해 놓은 사이트. checker board부터 image mapping까지 다양한 정보에 대해 나와있다.
 
 ## 좀 더 이론적인 설명이 궁금하다면
-- [Ray Tracing 구현과정](https://learnopengl.com/Lighting/Basic-Lighting)
-- [Phong model](https://raytracing.github.io/books/RayTracingInOneWeekend.html)
-- [Texture-mapping](http://raytracerchallenge.com/bonus/texture-mapping.html) 
+- [Ray Tracing 구현과정](md/RayTracing.md)
+- [Phong model](md/Phong.md)
+- [Texture-mapping](md/TextureMapping.md) 
 
 
 ## 프로젝트를 직접 테스트 하고 싶다면..

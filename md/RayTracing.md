@@ -157,4 +157,6 @@ int	dscrmnt_sp(t_dscrmnt *d, t_ray *ray, t_sphere *sp, t_vector *oc)
 
 ```
 
-해당 과정을 통해 구를 Rendering 할 수 있게 된다. 평면, 원기둥, 원뿔 또한 벡터 방정식을 활용한 판별식을 통해 광선이 물체와 교차하는지 확인할 수 있다. 
+해당 과정을 통해 구를 Rendering 할 수 있게 된다. 평면, 원기둥, 원뿔 또한 벡터 방정식을 활용한 판별식을 통해 광선이 물체와 교차하는지 확인할 수 있다. 이 과정을 마쳤을 때 나오는 결과는 아래와 같다.
+
+![red-sphere](../images/red-sphere.png)

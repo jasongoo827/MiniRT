@@ -1,5 +1,5 @@
 # MiniRT
-
+Ray Tracing Project by C.
 ## 만든이들
 
 jgoo(구재우) / yakim(김양현)
